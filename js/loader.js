@@ -166,8 +166,7 @@
           "Chúc mừng ngày 20/10, Chi nhé! 💐",
           "Chúc Chi luôn xinh đẹp, rạng rỡ và hạnh phúc 💕",
           "Mỗi ngày của Chi đều ngập tràn niềm vui ✨",
-          "Mong những điều ngọt ngào nhất luôn đến với Chi 🌸",
-          "Yêu thương và trân trọng Chi thật nhiều 💖"
+          "Mong những điều ngọt ngào nhất luôn đến với Chi 🌸"
         ];
         pageData.props.client.images = defaultPhotos;
         pageData.props.client.music = "assets/music/cho-anh-chut-thoi.mp3";
