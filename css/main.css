@@ -41,6 +41,12 @@
 /* ==========================================================
    Base — html, body, canvas
    ========================================================== */
+html, body, #app, #love-rain-screen, #intro-screen, canvas {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
 html, body {
   background: #0a0512 !important;
   color-scheme: dark;
@@ -56,12 +62,14 @@ body {
 canvas {
   display: block;
   touch-action: manipulation;
-  user-select: none; -webkit-user-select: none;
-  -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 @media screen and (max-width: 768px) {
   canvas { max-width: 100vw; max-height: 100%; }
-  *      { touch-action: manipulation; }
+  *      { touch-action: manipulation; -webkit-touch-callout: none !important; }
 }
 
 /* ==========================================================

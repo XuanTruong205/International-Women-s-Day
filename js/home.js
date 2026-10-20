@@ -6731,25 +6731,28 @@ function Hr({ color: e, messages: t, fontName: i }) {
   let a = 0;
 
   if (isMob) {
-    const mobX = [-11.5, -5.8, 0, 5.8, 11.5];
-    const mobZ = [-20, -11, -2, 7];
+    const mobX = [-5.8, -2.0, 2.0, 5.8];
+    const mobZ = [-18, -10, -2, 6];
+    const total = mobZ.length * mobX.length;
+    const range = 83; // 48 - (-35)
+    let idx = 0;
     for (let l = 0; l < mobZ.length; l++) {
       for (let d = 0; d < mobX.length; d++) {
-        const m = t[a % t.length];
-        const startX = mobX[d] + (l % 2 === 0 ? 0.8 : -0.8);
-        const startZ = mobZ[l] + (d % 2 === 0 ? 0.8 : -0.8);
+        const m = t[idx % t.length];
+        const startX = mobX[d];
+        const startZ = mobZ[l];
+        const offsetY = (idx / total) * range;
         o.push(
           B.jsx(
             Nr,
             {
               text: m,
               startX: startX,
-              startY: -5 + Math.random() * 60,
               startZ: startZ,
-              speed: 5 + Math.random() * 2,
-              delay: Math.random() * 2.5,
-              fontSize: 0.82,
-              maxWidth: 9.8,
+              speed: 4.2,
+              offsetY: offsetY,
+              fontSize: 0.78,
+              maxWidth: 16,
               color: e ?? "#EE66A6",
               font: i
                 ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -6758,7 +6761,7 @@ function Hr({ color: e, messages: t, fontName: i }) {
             `text-${l}-${d}`
           )
         );
-        a++;
+        idx++;
       }
     }
     return o;
@@ -6766,6 +6769,8 @@ function Hr({ color: e, messages: t, fontName: i }) {
 
   const rows = isTablet ? 6 : 8;
   const cols = isTablet ? 10 : 16;
+  const total = rows * cols;
+  const range = 83;
   for (let l = 0; l < rows; l++)
     for (let d = 0; d < cols; d++) {
       const m = t[a % t.length],
@@ -6773,18 +6778,18 @@ function Hr({ color: e, messages: t, fontName: i }) {
         y = f ? 6 : 3;
       const xStep = isTablet ? (19 / 9) : 1;
       const zStep = isTablet ? (9 / 5) : 1;
+      const offsetY = (a / total) * range;
       o.push(
         B.jsx(
           Nr,
           {
             text: m,
             startX: -9.5 * y + d * y * xStep,
-            startY: -10 + Math.random() * 100,
             startZ: -18 + l * 4 * zStep,
-            speed: 7 + Math.random() * 2,
-            delay: Math.random() * 2,
+            speed: 5.5,
+            offsetY: offsetY,
             fontSize: f ? 1 : 1.2,
-            maxWidth: 18,
+            maxWidth: 24,
             color: e ?? "#EE66A6",
             font: i
               ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -6803,7 +6808,8 @@ function Nr({
   startY: i,
   startZ: s,
   speed: n,
-  delay: r,
+  offsetY: sOffset = 0,
+  delay: r = 0,
   fontSize: customFontSize,
   maxWidth: customMaxWidth,
   color: o,
@@ -6819,17 +6825,17 @@ function Nr({
     v = new He(),
     O = 2.5,
     isMob = typeof window !== "undefined" && window.innerWidth < 768,
-    actualFontSize = customFontSize || (isMob ? 0.82 : 1.15),
-    actualMaxWidth = customMaxWidth || (isMob ? 9.8 : 18);
+    actualFontSize = customFontSize || (isMob ? 0.78 : 1.15),
+    actualMaxWidth = customMaxWidth || (isMob ? 16 : 24);
 
   return (
     Je((w) => {
       if (l.current && d.current) {
-        const h = w.clock.elapsedTime + r;
-        let p = topY - ((h * n) % range);
+        const h = w.clock.elapsedTime;
+        let p = topY - ((h * n + sOffset) % range);
         if (!isFinite(p)) return;
         l.current.position.y = p;
-        const g = (Math.sin(h / O) + 1) / 2;
+        const g = (Math.sin((h + sOffset * 0.1) / O) + 1) / 2;
         v.lerpColors(f, y, g);
         d.current.color.set(v);
         d.current.emissive.set(v);
@@ -6840,7 +6846,7 @@ function Nr({
       font: a,
       fontSize: actualFontSize,
       maxWidth: actualMaxWidth,
-      lineHeight: 1.35,
+      lineHeight: 1.38,
       letterSpacing: -0.01,
       position: [t, topY, s],
       anchorX: "center",
@@ -7151,17 +7157,17 @@ function PhotoRain() {
   const isMob = typeof window !== "undefined" && window.innerWidth < 768;
   const t = [];
   const zLayers = isMob ? [-18, -10, -2, 6] : [-20, -8, 4, 16];
-  const xCols = isMob ? [-12.5, -6.2, 0, 6.2, 12.5] : [-24, -12, 0, 12, 24];
-  const itemBaseSize = isMob ? 5.2 : 7.2;
+  const xCols = isMob ? [-8.0, 0, 8.0] : [-24, -12, 0, 12, 24];
+  const itemBaseSize = isMob ? 5.0 : 7.2;
   const total = zLayers.length * xCols.length;
   let idx = 0;
   for (let r = 0; r < zLayers.length; r++) {
     for (let c = 0; c < xCols.length; c++) {
       const url = photoUrls[idx % photoUrls.length];
-      const startX = xCols[c] + (c % 2 === 0 ? 0.6 : -0.6);
-      const startZ = zLayers[r] + (r % 2 === 0 ? 0.8 : -0.8);
-      const speed = (isMob ? 3.8 : 4.5) + ((r * 3 + c * 7) % 5) * 0.5;
-      const offsetY = (idx / total) * 90;
+      const startX = xCols[c];
+      const startZ = zLayers[r];
+      const speed = isMob ? 3.8 : (4.5 + ((r * 3 + c * 7) % 5) * 0.5);
+      const offsetY = (idx / total) * (isMob ? 81 : 90);
       const seed = r * 13 + c * 17;
       t.push(
         B.jsx(
