@@ -7073,12 +7073,11 @@ class PhotoTexLoader {
   }
 }
 const defaultPhotoUrls = [
-  new URL("../assets/image/anh2.jpg", import.meta.url).href,
-  new URL("../assets/image/anhDoi2.jpg", import.meta.url).href,
-  new URL("../assets/image/doi2.jpg", import.meta.url).href,
-  new URL("../assets/image/doi3.jpg", import.meta.url).href,
-  new URL("../assets/image/doi4.jpg", import.meta.url).href,
-  new URL("../assets/image/doi5.jpg", import.meta.url).href,
+  new URL("../assets/image/chi1.png", import.meta.url).href,
+  new URL("../assets/image/chi2.jpg", import.meta.url).href,
+  new URL("../assets/image/chi3.jpg", import.meta.url).href,
+  new URL("../assets/image/chi4.png", import.meta.url).href,
+  new URL("../assets/image/chi5.jpg", import.meta.url).href,
 ];
 function PhotoRainItem({ url, startX: e, startZ: t, speed: i, offsetY: s, seed: r, baseSize = 8.5 }) {
   const n = M.useRef();

@@ -58,12 +58,11 @@ function resolveMusicUrl(music) {
 window.resolveMusicUrl = resolveMusicUrl;
 
 const DEFAULT_IMAGES = [
-  'assets/image/anh2.jpg',
-  'assets/image/anhDoi2.jpg',
-  'assets/image/doi2.jpg',
-  'assets/image/doi3.jpg',
-  'assets/image/doi4.jpg',
-  'assets/image/doi5.jpg',
+  'assets/image/chi1.png',
+  'assets/image/chi2.jpg',
+  'assets/image/chi3.jpg',
+  'assets/image/chi4.png',
+  'assets/image/chi5.jpg',
 ];
 
 /* ── Dữ liệu mặc định (fallback khi không có server) ────── */
