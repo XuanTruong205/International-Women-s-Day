@@ -6608,15 +6608,33 @@ function Zr({ client: e, clientId: t }) {
         (window.dataChristmasTree && window.dataChristmasTree.data && window.dataChristmasTree.data.backgroundMusic) ||
         "assets/music/cho-anh-chut-thoi.mp3";
 
+      const nextMusic = "assets/music/in-love.mp3";
+
+      const attachPlaylist = (a) => {
+        if (!a || a.__playlistAttached) return;
+        a.__playlistAttached = true;
+        a.loop = false;
+        a.addEventListener("ended", () => {
+          console.log("🎵 Track 1 kết thúc, tự động phát track 2:", nextMusic);
+          a.src = nextMusic;
+          a.loop = true;
+          a.currentTime = 0;
+          a.play().catch(() => {});
+        });
+      };
+
       let audio = window.__introAudio;
       if (!audio) {
         audio = new Audio(musicSrc);
-        audio.loop = true;
         audio.volume = 0.8;
+        attachPlaylist(audio);
         window.__introAudio = audio;
-      } else if (musicSrc && audio.src && !audio.src.includes(encodeURI(musicSrc)) && !audio.src.includes(musicSrc)) {
-        audio.src = musicSrc;
-        audio.currentTime = 0;
+      } else {
+        attachPlaylist(audio);
+        if (musicSrc && audio.src && !audio.src.includes(encodeURI(musicSrc)) && !audio.src.includes(musicSrc) && !audio.src.includes("in-love.mp3")) {
+          audio.src = musicSrc;
+          audio.currentTime = 0;
+        }
       }
 
       const ensurePlaying = () => {

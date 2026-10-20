@@ -21,6 +21,30 @@
       || null;
   }
 
+  const NEXT_MUSIC = 'assets/music/in-love.mp3';
+
+  // Preload track 2 để chuyển bài mượt mà không bị delay
+  try {
+    const _pre = new Audio();
+    _pre.preload = 'auto';
+    _pre.src = NEXT_MUSIC;
+  } catch (e) {}
+
+  function attachPlaylist(audio) {
+    if (!audio || audio.__playlistAttached) return;
+    audio.__playlistAttached = true;
+    audio.loop = false; // Tắt loop bài 1 để kích hoạt sự kiện ended
+    audio.addEventListener('ended', function onFirstTrackEnded() {
+      console.log('🎵 Track 1 kết thúc, tự động phát track 2:', NEXT_MUSIC);
+      audio.src = NEXT_MUSIC;
+      audio.loop = true; // Lặp lại bài 2 liên tục
+      audio.currentTime = 0;
+      audio.play().catch(function (err) {
+        console.warn('Tự động phát track 2 gặp lỗi:', err);
+      });
+    });
+  }
+
   /**
    * Bước 1 — gọi trong pointerdown (user gesture context).
    * Tạo Audio + play() ngay để browser "unlock" audio context,
@@ -31,8 +55,8 @@
     const url = getMusicUrl();
     if (!url) return;
     _audio = new Audio(url);
-    _audio.loop   = true;
     _audio.volume = 0.8;
+    attachPlaylist(_audio);
     _audio.play().then(() => {
       // Unlock thành công → chỉ pause nếu complete() chưa được kích hoạt
       if (!triggered) {
@@ -54,8 +78,9 @@
     const url = getMusicUrl();
     if (!url) return;
     if (_audio) {
+      attachPlaylist(_audio);
       // Nếu src đã bị thay đổi bởi configLoaded → cập nhật
-      if (url && _audio.src && !_audio.src.includes(url) && !_audio.src.endsWith(encodeURI(url))) {
+      if (url && _audio.src && !_audio.src.includes(url) && !_audio.src.endsWith(encodeURI(url)) && !_audio.src.includes('in-love.mp3')) {
         _audio.src = url;
         _audio.currentTime = 0;
       }
@@ -67,8 +92,8 @@
     } else {
       // Fallback: tạo mới (Mobile tap — pointerdown = complete ngay)
       _audio = new Audio(url);
-      _audio.loop   = true;
       _audio.volume = 0.8;
+      attachPlaylist(_audio);
       _audio.play().catch(() => {});
       window.__introAudio = _audio;
     }
