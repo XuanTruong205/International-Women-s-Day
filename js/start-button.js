@@ -10,7 +10,7 @@
   if (!wrap) return;
 
   const HOLD_MS   = 1000;
-  const isAndroid = /Android/i.test(navigator.userAgent || '');
+  const isTouch   = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
   let holdTimer = null, holdStart = 0, triggered = false;
   let _audio = null;
 
@@ -65,7 +65,7 @@
         _audio.play().catch(() => {});
       }
     } else {
-      // Fallback: tạo mới (Android tap — pointerdown = complete ngay)
+      // Fallback: tạo mới (Mobile tap — pointerdown = complete ngay)
       _audio = new Audio(url);
       _audio.loop   = true;
       _audio.volume = 0.8;
@@ -105,7 +105,7 @@
     obs.observe(lo, { attributes: true, attributeFilter: ['class'] });
   }
 
-  if (isAndroid && label) label.textContent = 'Chạm để bắt đầu';
+  if (isTouch && label) label.textContent = 'Chạm để bắt đầu';
 
   function complete() {
     if (triggered) return;
@@ -120,13 +120,14 @@
     if (triggered) return;
     e.preventDefault();
 
-    /* Android: single-tap — unlock + complete cùng lúc trong user gesture */
-    if (isAndroid) {
+    /* Touch screen: single tap / hold — unlock + complete ngay trong user gesture */
+    if (isTouch) {
+      unlockMusic();
       complete();
       return;
     }
 
-    /* Desktop / iOS: unlock audio ngay trong pointerdown (user gesture) */
+    /* Desktop: unlock audio ngay trong pointerdown (user gesture) */
     unlockMusic();
     holdStart = Date.now();
     ringFill.style.transition = 'stroke-dashoffset 1s linear';
@@ -142,7 +143,7 @@
   }
 
   function onUp() {
-    if (isAndroid || triggered) return;
+    if (isTouch || triggered) return;
     if (holdTimer) { clearInterval(holdTimer); holdTimer = null; }
     wrap.classList.remove('held');
     ringFill.style.transition = 'stroke-dashoffset .3s ease';

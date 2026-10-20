@@ -6657,10 +6657,13 @@ function Zr({ client: e, clientId: t }) {
                   top: 0,
                   left: 0,
                   width: "100%",
-                  height: "100vh",
+                  height: "100%",
                   background: "transparent",
                 },
-                camera: { position: [0, 0, 30], fov: 100 },
+                camera: {
+                  position: [0, 0, typeof window !== "undefined" && window.innerWidth < 768 ? 34 : 30],
+                  fov: typeof window !== "undefined" && window.innerWidth < 768 ? 92 : 100
+                },
                 dpr: [1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1, 1.5)],
                 gl: { antialias: !0, alpha: !0, powerPreference: "high-performance" },
                 children: [
@@ -6700,13 +6703,14 @@ function Zr({ client: e, clientId: t }) {
   );
 }
 function Hr({ color: e, messages: t, fontName: i }) {
-  const isTabletOrMob = typeof window !== "undefined" && (
-    /iPad|iPhone|Android/i.test(navigator.userAgent) ||
-    (navigator.maxTouchPoints > 1) ||
+  const isMob = typeof window !== "undefined" && window.innerWidth < 768;
+  const isTablet = typeof window !== "undefined" && !isMob && (
+    /iPad|Android/i.test(navigator.userAgent) ||
+    navigator.maxTouchPoints > 1 ||
     window.innerWidth <= 1024
   );
-  const rows = isTabletOrMob ? 7 : 10;
-  const cols = isTabletOrMob ? 14 : 20;
+  const rows = isMob ? 5 : isTablet ? 7 : 10;
+  const cols = isMob ? 8 : isTablet ? 14 : 20;
   const o = [];
   let a = 0;
   for (let l = 0; l < rows; l++)
@@ -6714,19 +6718,19 @@ function Hr({ color: e, messages: t, fontName: i }) {
       const m = t[a % t.length],
         f = m.length > 20,
         y = f ? 6 : 3;
-      const xStep = isTabletOrMob ? (19 / 13) : 1;
-      const zStep = isTabletOrMob ? (9 / 6) : 1;
+      const xStep = isMob ? (19 / 7) : isTablet ? (19 / 13) : 1;
+      const zStep = isMob ? (9 / 4) : isTablet ? (9 / 6) : 1;
       (o.push(
         B.jsx(
           Nr,
           {
             text: m,
-            startX: -9.5 * y + d * y * xStep,
+            startX: isMob ? -8 * y + d * y * 0.9 : -9.5 * y + d * y * xStep,
             startY: -10 + Math.random() * 100,
             startZ: -10 + l * y * 1.5 * zStep,
             speed: 7 + Math.random() * 2,
             delay: Math.random() * 2,
-            fontSize: f ? 1 : 1.2,
+            fontSize: isMob ? (f ? 0.9 : 1.1) : (f ? 1 : 1.2),
             color: e ?? "#EE66A6",
             font: i
               ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -6756,6 +6760,8 @@ function Nr({
     y = new He("#99DDFF"),
     v = new He(),
     O = 2.5,
+    isMob = typeof window !== "undefined" && window.innerWidth < 768,
+    wordsLimit = isMob ? 4 : 8,
     S = M.useMemo(() => {
       const w = e.split(/(\s+)/);
       let h = 0,
@@ -6764,7 +6770,7 @@ function Nr({
         w.forEach((g) => {
           (g.trim().length > 0 && h++,
             (p += g),
-            h >= 8 &&
+            h >= wordsLimit &&
             g.match(/\s+/) &&
             ((p =
               p.trimEnd() +
@@ -6774,7 +6780,7 @@ function Nr({
         }),
         p.trim()
       );
-    }, [e]);
+    }, [e, wordsLimit]);
   return (
     Je((w) => {
       if (l.current && l.current && d.current) {
@@ -6791,7 +6797,7 @@ function Nr({
     B.jsxs($i, {
       ref: l,
       font: a,
-      fontSize: 1.5,
+      fontSize: isMob ? 1.2 : 1.5,
       letterSpacing: -0.1,
       position: [t, i, s],
       anchorX: "center",
@@ -6896,14 +6902,17 @@ function Fr({ startX: e, startZ: t, speed: i, color: s }) {
   );
 }
 function kr({ color: e }) {
+  const isMob = typeof window !== "undefined" && window.innerWidth < 768;
+  const countX = isMob ? 6 : 10;
+  const countZ = isMob ? 6 : 10;
   const t = [];
-  for (let r = 0; r < 10; r++)
-    for (let o = 0; o < 10; o++)
+  for (let r = 0; r < countZ; r++)
+    for (let o = 0; o < countX; o++)
       t.push(
         B.jsx(
           Fr,
           {
-            startX: -27 + o * 6,
+            startX: isMob ? -16 + o * 6.4 : -27 + o * 6,
             startZ: -8 + r * 6 * 1.5,
             speed: 5 + Math.random() * 10,
             color: "#EE66A6",
@@ -7126,9 +7135,11 @@ function PhotoRain() {
     return null;
   }
 
+  const isMob = typeof window !== "undefined" && window.innerWidth < 768;
   const t = [];
   const zLayers = [-6, 12, 28, 44, 60];
-  const xCols = [-30, -18, -6, 6, 18, 30];
+  const xCols = isMob ? [-16, -8, 0, 8, 16] : [-30, -18, -6, 6, 18, 30];
+  const itemBaseSize = isMob ? 6.5 : 8.5;
   const total = zLayers.length * xCols.length;
   let idx = 0;
   for (let r = 0; r < zLayers.length; r++) {
@@ -7149,7 +7160,7 @@ function PhotoRain() {
             speed: speed,
             offsetY: offsetY,
             seed: seed,
-            baseSize: 8.5,
+            baseSize: itemBaseSize,
           },
           `photo-${r}-${c}`,
         ),

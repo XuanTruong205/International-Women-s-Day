@@ -19,12 +19,12 @@ const u = 500,
             navigator.userAgent || "",
         )
             ? p
-                ? 4e4
-                : 6e4
+                ? 3.5e4
+                : 5e4
             : p
-                ? 8e4
-                : 12e4,
-        particleSize: p ? 0.12 : 0.15,
+                ? 4.5e4
+                : 10e4,
+        particleSize: p ? 0.18 : 0.15,
         explosionPower: 150,
         gatherSpeed: p ? 0.08 : 0.05,
         depthThickness: p ? 1 : 1.5,
@@ -279,7 +279,7 @@ function F(e) {
         const isMob = window.innerWidth < 768;
         const nCanvas = isMob ? 600 : 1200;
         const oCanvas = 500;
-        let fontSize = isMob ? 120 : 160;
+        let fontSize = isMob ? 85 : 150;
         const depth = w.depthThickness;
         const rCanvas = document.createElement("canvas");
         rCanvas.width = nCanvas;
