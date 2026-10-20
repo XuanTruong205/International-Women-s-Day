@@ -6679,8 +6679,8 @@ function Zr({ client: e, clientId: t }) {
                   background: "transparent",
                 },
                 camera: {
-                  position: [0, 0, typeof window !== "undefined" && window.innerWidth < 768 ? 34 : 30],
-                  fov: typeof window !== "undefined" && window.innerWidth < 768 ? 92 : 100
+                  position: [0, 0, typeof window !== "undefined" && window.innerWidth < 768 ? 40 : 30],
+                  fov: typeof window !== "undefined" && window.innerWidth < 768 ? 65 : 95
                 },
                 dpr: [1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1, 1.5)],
                 gl: { antialias: !0, alpha: !0, powerPreference: "high-performance" },
@@ -6727,37 +6727,74 @@ function Hr({ color: e, messages: t, fontName: i }) {
     navigator.maxTouchPoints > 1 ||
     window.innerWidth <= 1024
   );
-  const rows = isMob ? 5 : isTablet ? 7 : 10;
-  const cols = isMob ? 8 : isTablet ? 14 : 20;
+
   const o = [];
   let a = 0;
+
+  if (isMob) {
+    const mobX = [-6.5, -2.2, 2.2, 6.5];
+    const mobZ = [-20, -11, -2, 7];
+    for (let l = 0; l < mobZ.length; l++) {
+      for (let d = 0; d < mobX.length; d++) {
+        const m = t[a % t.length];
+        const startX = mobX[d] + (l % 2 === 0 ? 0.6 : -0.6);
+        const startZ = mobZ[l] + (d % 2 === 0 ? 0.8 : -0.8);
+        o.push(
+          B.jsx(
+            Nr,
+            {
+              text: m,
+              startX: startX,
+              startY: -5 + Math.random() * 60,
+              startZ: startZ,
+              speed: 5 + Math.random() * 2,
+              delay: Math.random() * 2.5,
+              fontSize: 0.68,
+              maxWidth: 9.0,
+              color: e ?? "#EE66A6",
+              font: i
+                ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
+                : new URL("../assets/font/Mali.ttf", import.meta.url).href,
+            },
+            `text-${l}-${d}`
+          )
+        );
+        a++;
+      }
+    }
+    return o;
+  }
+
+  const rows = isTablet ? 6 : 8;
+  const cols = isTablet ? 10 : 16;
   for (let l = 0; l < rows; l++)
     for (let d = 0; d < cols; d++) {
       const m = t[a % t.length],
         f = m.length > 20,
         y = f ? 6 : 3;
-      const xStep = isMob ? (19 / 7) : isTablet ? (19 / 13) : 1;
-      const zStep = isMob ? (9 / 4) : isTablet ? (9 / 6) : 1;
-      (o.push(
+      const xStep = isTablet ? (19 / 9) : 1;
+      const zStep = isTablet ? (9 / 5) : 1;
+      o.push(
         B.jsx(
           Nr,
           {
             text: m,
-            startX: isMob ? -8 * y + d * y * 0.9 : -9.5 * y + d * y * xStep,
+            startX: -9.5 * y + d * y * xStep,
             startY: -10 + Math.random() * 100,
-            startZ: -10 + l * y * 1.5 * zStep,
+            startZ: -18 + l * 4 * zStep,
             speed: 7 + Math.random() * 2,
             delay: Math.random() * 2,
-            fontSize: isMob ? (f ? 0.9 : 1.1) : (f ? 1 : 1.2),
+            fontSize: f ? 1 : 1.2,
+            maxWidth: 18,
             color: e ?? "#EE66A6",
             font: i
               ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
               : new URL("../assets/font/Mali.ttf", import.meta.url).href,
           },
           `text-${l}-${d}`,
-        ),
-      ),
-        a++);
+        )
+      );
+      a++;
     }
   return o;
 }
@@ -6768,64 +6805,53 @@ function Nr({
   startZ: s,
   speed: n,
   delay: r,
+  fontSize: customFontSize,
+  maxWidth: customMaxWidth,
   color: o,
   font: a,
 }) {
   const l = M.useRef(),
     d = M.useRef(),
-    m = -30,
+    m = -35,
+    topY = 48,
+    range = topY - m,
     f = new He("#EE66A6"),
     y = new He("#99DDFF"),
     v = new He(),
     O = 2.5,
     isMob = typeof window !== "undefined" && window.innerWidth < 768,
-    wordsLimit = isMob ? 4 : 8,
-    S = M.useMemo(() => {
-      const w = e.split(/(\s+)/);
-      let h = 0,
-        p = "";
-      return (
-        w.forEach((g) => {
-          (g.trim().length > 0 && h++,
-            (p += g),
-            h >= wordsLimit &&
-            g.match(/\s+/) &&
-            ((p =
-              p.trimEnd() +
-              `
-`),
-              (h = 0)));
-        }),
-        p.trim()
-      );
-    }, [e, wordsLimit]);
+    actualFontSize = customFontSize || (isMob ? 0.68 : 1.15),
+    actualMaxWidth = customMaxWidth || (isMob ? 9.0 : 18);
+
   return (
     Je((w) => {
-      if (l.current && l.current && d.current) {
+      if (l.current && d.current) {
         const h = w.clock.elapsedTime + r;
-        let p = i - ((h * n) % (i - m));
+        let p = topY - ((h * n) % range);
         if (!isFinite(p)) return;
         l.current.position.y = p;
         const g = (Math.sin(h / O) + 1) / 2;
-        (v.lerpColors(f, y, g),
-          d.current.color.set(v),
-          d.current.emissive.set(v));
+        v.lerpColors(f, y, g);
+        d.current.color.set(v);
+        d.current.emissive.set(v);
       }
     }),
     B.jsxs($i, {
       ref: l,
       font: a,
-      fontSize: isMob ? 1.2 : 1.5,
-      letterSpacing: -0.1,
-      position: [t, i, s],
+      fontSize: actualFontSize,
+      maxWidth: actualMaxWidth,
+      lineHeight: 1.35,
+      letterSpacing: -0.01,
+      position: [t, topY, s],
       anchorX: "center",
       anchorY: "middle",
       textAlign: "center",
       children: [
-        S,
+        e,
         B.jsx("meshStandardMaterial", {
           ref: d,
-          emissiveIntensity: 1,
+          emissiveIntensity: 1.1,
           toneMapped: !1,
           side: qe,
         }),
@@ -6883,31 +6909,30 @@ class HeartTexLoader {
   }
 }
 const heartIconUrl = new URL("../assets/icons/iconHeart.png", import.meta.url).href;
-function Fr({ startX: e, startZ: t, speed: i, color: s }) {
+function Fr({ startX: e, startZ: t, speed: i, color: s, scale: customScale = 1.2 }) {
   const n = M.useRef(),
     matRef = M.useRef(),
     r = mi(HeartTexLoader, heartIconUrl),
-    o = 50 + Math.random() * 20,
-    a = -40,
-    // offset ngẫu nhiên để mỗi trái tim nhịp đập lệch pha nhau
+    o = 45 + Math.random() * 15,
+    a = -35,
+    range = o - a,
     pulseOffset = Math.random() * Math.PI * 2;
   return (
     Je((l) => {
       if (n.current) {
         const d = l.clock.elapsedTime;
-        let m = o - ((d * i) % (o - a));
+        let m = o - ((d * i) % range);
         n.current.position.y = m;
-        n.current.rotation.z = 0;
-        // Hiệu ứng phát sáng nhịp thở: opacity dao động 0.72 → 1.0
+        n.current.position.x = e + Math.sin(d * 0.8 + pulseOffset) * 0.5;
         if (matRef.current) {
-          matRef.current.opacity = 0.72 + 0.28 * (0.5 + 0.5 * Math.sin(d * 1.8 + pulseOffset));
+          matRef.current.opacity = 0.72 + 0.28 * (0.5 + 0.5 * Math.sin(d * 2.2 + pulseOffset));
         }
       }
     }),
     B.jsx("sprite", {
       ref: n,
       position: [e, o, t],
-      scale: [2.4, 2.4, 1],
+      scale: [customScale, customScale, 1],
       children: B.jsx("spriteMaterial", {
         ref: matRef,
         map: r,
@@ -6921,19 +6946,43 @@ function Fr({ startX: e, startZ: t, speed: i, color: s }) {
 }
 function kr({ color: e }) {
   const isMob = typeof window !== "undefined" && window.innerWidth < 768;
-  const countX = isMob ? 6 : 10;
-  const countZ = isMob ? 6 : 10;
   const t = [];
-  for (let r = 0; r < countZ; r++)
-    for (let o = 0; o < countX; o++)
+  if (isMob) {
+    const mobHeartX = [-8.5, -4.2, 0, 4.2, 8.5];
+    const mobHeartZ = [-22, -13, -3, 6];
+    for (let r = 0; r < mobHeartZ.length; r++) {
+      for (let o = 0; o < mobHeartX.length; o++) {
+        const startX = mobHeartX[o] + (r % 2 === 0 ? 0.7 : -0.7);
+        const startZ = mobHeartZ[r] + (o % 2 === 0 ? 0.8 : -0.8);
+        t.push(
+          B.jsx(
+            Fr,
+            {
+              startX: startX,
+              startZ: startZ,
+              speed: 4 + Math.random() * 4,
+              color: "#EE66A6",
+              scale: 1.15,
+            },
+            `heart-${r}-${o}`,
+          )
+        );
+      }
+    }
+    return t;
+  }
+
+  for (let r = 0; r < 8; r++)
+    for (let o = 0; o < 8; o++)
       t.push(
         B.jsx(
           Fr,
           {
-            startX: isMob ? -16 + o * 6.4 : -27 + o * 6,
-            startZ: -8 + r * 6 * 1.5,
-            speed: 5 + Math.random() * 10,
+            startX: -24 + o * 6,
+            startZ: -18 + r * 5,
+            speed: 5 + Math.random() * 8,
             color: "#EE66A6",
+            scale: 2.0,
           },
           `heart-${r}-${o}`,
         ),
@@ -7100,8 +7149,9 @@ const defaultPhotoUrls = [
 function PhotoRainItem({ url, startX: e, startZ: t, speed: i, offsetY: s, seed: r, baseSize = 8.5 }) {
   const n = M.useRef();
   const a = mi(PhotoTexLoader, url);
-  const topY = 60;
-  const bottomY = -40;
+  const isMob = typeof window !== "undefined" && window.innerWidth < 768;
+  const topY = isMob ? 46 : 60;
+  const bottomY = isMob ? -35 : -40;
   const range = topY - bottomY;
 
   const aspect = a.aspectRatio || (a.image ? a.image.width / a.image.height : 1);
@@ -7114,8 +7164,8 @@ function PhotoRainItem({ url, startX: e, startZ: t, speed: i, offsetY: s, seed: 
         const d = l.clock.elapsedTime;
         const y = topY - ((d * i + s) % range);
         n.current.position.y = y;
-        n.current.position.x = e + Math.sin(d * 0.7 + r) * 0.8;
-        n.current.rotation.z = Math.sin(d * 0.5 + r) * 0.06;
+        n.current.position.x = e + Math.sin(d * 0.7 + r) * 0.6;
+        n.current.rotation.z = Math.sin(d * 0.5 + r) * 0.05;
       }
     }),
     B.jsx("sprite", {
@@ -7132,40 +7182,29 @@ function PhotoRainItem({ url, startX: e, startZ: t, speed: i, offsetY: s, seed: 
   );
 }
 function PhotoRain() {
-  console.log('🖼️ [PhotoRain] LOVEGIFT_NO_IMAGES:', window.LOVEGIFT_NO_IMAGES);
-  console.log('🖼️ [PhotoRain] LOVEGIFT_IMAGES:', window.LOVEGIFT_IMAGES);
-
-  if (window.LOVEGIFT_NO_IMAGES) {
-    console.warn('🖼️ [PhotoRain] → Bỏ qua vì LOVEGIFT_NO_IMAGES = true');
-    return null;
-  }
+  if (window.LOVEGIFT_NO_IMAGES) return null;
 
   const photoUrls =
     (window.LOVEGIFT_IMAGES && window.LOVEGIFT_IMAGES.length > 0)
       ? window.LOVEGIFT_IMAGES
       : defaultPhotoUrls;
 
-  console.log('🖼️ [PhotoRain] → Sử dụng', photoUrls.length, 'ảnh:', photoUrls);
-
-  if (!photoUrls || photoUrls.length === 0) {
-    console.warn('🖼️ [PhotoRain] → Không có ảnh nào!');
-    return null;
-  }
+  if (!photoUrls || photoUrls.length === 0) return null;
 
   const isMob = typeof window !== "undefined" && window.innerWidth < 768;
   const t = [];
-  const zLayers = [-6, 12, 28, 44, 60];
-  const xCols = isMob ? [-16, -8, 0, 8, 16] : [-30, -18, -6, 6, 18, 30];
-  const itemBaseSize = isMob ? 6.5 : 8.5;
+  const zLayers = isMob ? [-16, -6, 4] : [-20, -8, 4, 16];
+  const xCols = isMob ? [-7.2, -2.4, 2.4, 7.2] : [-24, -12, 0, 12, 24];
+  const itemBaseSize = isMob ? 4.2 : 7.2;
   const total = zLayers.length * xCols.length;
   let idx = 0;
   for (let r = 0; r < zLayers.length; r++) {
     for (let c = 0; c < xCols.length; c++) {
       const url = photoUrls[idx % photoUrls.length];
-      const startX = xCols[c] + (c % 2 === 0 ? 1.5 : -1.5);
-      const startZ = zLayers[r] + (r % 2 === 0 ? 2 : -2);
-      const speed = 4.5 + ((r * 3 + c * 7) % 5) * 0.6;
-      const offsetY = (idx / total) * 100;
+      const startX = xCols[c] + (c % 2 === 0 ? 0.6 : -0.6);
+      const startZ = zLayers[r] + (r % 2 === 0 ? 0.8 : -0.8);
+      const speed = (isMob ? 3.8 : 4.5) + ((r * 3 + c * 7) % 5) * 0.5;
+      const offsetY = (idx / total) * 90;
       const seed = r * 13 + c * 17;
       t.push(
         B.jsx(
