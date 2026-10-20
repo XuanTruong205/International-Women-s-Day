@@ -6731,7 +6731,7 @@ function Hr({ color: e, messages: t, fontName: i }) {
   const range = 83; // topY: 48, bottomY: -35
 
   if (isMob) {
-    const lanes = [-4.2, 4.2, 0];
+    const lanes = [-2.6, 2.6, 0];
     const zLayers = [-10, -2, 6];
     const total = 12;
     for (let idx = 0; idx < total; idx++) {
@@ -6748,8 +6748,7 @@ function Hr({ color: e, messages: t, fontName: i }) {
             startZ: startZ,
             speed: 4.2,
             offsetY: offsetY,
-            fontSize: 0.76,
-            maxWidth: 15,
+            fontSize: 0.68,
             color: e ?? "#EE66A6",
             font: i
               ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -6763,10 +6762,10 @@ function Hr({ color: e, messages: t, fontName: i }) {
   }
 
   // Desktop & Tablet
-  const cols = isTablet ? 5 : 7;
+  const cols = isTablet ? 5 : 6;
   const rows = isTablet ? 3 : 4;
   const total = cols * rows;
-  const xStep = isTablet ? 14 : 12.5;
+  const xStep = isTablet ? 15 : 14.5;
   const startXBase = -((cols - 1) * xStep) / 2;
   const zLayers = isTablet ? [-14, -4, 6] : [-16, -8, 0, 8];
 
@@ -6774,7 +6773,7 @@ function Hr({ color: e, messages: t, fontName: i }) {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const m = t[itemIdx % t.length];
-      const startX = startXBase + c * xStep + (r % 2 === 0 ? 1.2 : -1.2);
+      const startX = startXBase + c * xStep + (r % 2 === 0 ? 1.0 : -1.0);
       const startZ = zLayers[r];
       const offsetHash = (c * 7 + r * 11) % total;
       const offsetY = (offsetHash / total) * range;
@@ -6787,8 +6786,7 @@ function Hr({ color: e, messages: t, fontName: i }) {
             startZ: startZ,
             speed: 5.0,
             offsetY: offsetY,
-            fontSize: isTablet ? 0.95 : 1.05,
-            maxWidth: isTablet ? 18 : 22,
+            fontSize: isTablet ? 0.85 : 0.95,
             color: e ?? "#EE66A6",
             font: i
               ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -6825,8 +6823,7 @@ function Nr({
     v = new He(),
     O = 2.5,
     isMob = typeof window !== "undefined" && window.innerWidth < 768,
-    actualFontSize = customFontSize || (isMob ? 0.78 : 1.15),
-    actualMaxWidth = customMaxWidth || (isMob ? 16 : 24);
+    actualFontSize = customFontSize || (isMob ? 0.68 : 0.95);
 
   return (
     Je((w) => {
@@ -6845,8 +6842,8 @@ function Nr({
       ref: l,
       font: a,
       fontSize: actualFontSize,
-      maxWidth: actualMaxWidth,
-      lineHeight: 1.38,
+      whiteSpace: "nowrap",
+      lineHeight: 1.3,
       letterSpacing: -0.01,
       position: [t, topY, s],
       anchorX: "center",
