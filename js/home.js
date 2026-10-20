@@ -6731,14 +6731,15 @@ function Hr({ color: e, messages: t, fontName: i }) {
   const range = 83; // topY: 48, bottomY: -35
 
   if (isMob) {
-    const lanes = [-2.6, 2.6, 0];
-    const zLayers = [-10, -2, 6];
-    const total = 12;
+    const total = 10;
+    const range = 83;
+    const mobLanes = [0, -1.8, 1.8, 0, -1.8];
+    const zLayers = [-6, 0, 5];
     for (let idx = 0; idx < total; idx++) {
       const m = t[idx % t.length];
-      const startX = lanes[idx % 3];
+      const startX = mobLanes[idx % mobLanes.length];
       const startZ = zLayers[idx % zLayers.length];
-      const offsetY = (idx / total) * range;
+      const offsetY = ((idx / total) * range + 7.0) % range;
       o.push(
         B.jsx(
           Nr,
@@ -6746,9 +6747,9 @@ function Hr({ color: e, messages: t, fontName: i }) {
             text: m,
             startX: startX,
             startZ: startZ,
-            speed: 4.2,
+            speed: 3.8,
             offsetY: offsetY,
-            fontSize: 0.68,
+            fontSize: 0.65,
             color: e ?? "#EE66A6",
             font: i
               ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -7151,9 +7152,39 @@ function PhotoRain() {
 
   const isMob = typeof window !== "undefined" && window.innerWidth < 768;
   const t = [];
-  const zLayers = isMob ? [-10, -2, 6] : [-20, -8, 4, 16];
-  const xCols = isMob ? [-7.2, 7.2] : [-24, -12, 0, 12, 24];
-  const itemBaseSize = isMob ? 5.8 : 7.2;
+
+  if (isMob) {
+    const total = 6;
+    const range = 81;
+    for (let idx = 0; idx < total; idx++) {
+      const url = photoUrls[idx % photoUrls.length];
+      const startX = idx % 2 === 0 ? -5.8 : 5.8;
+      const startZ = idx % 3 === 0 ? -6 : (idx % 3 === 1 ? 0 : 5);
+      const speed = 3.8;
+      const offsetY = (idx / total) * range;
+      const seed = idx * 23;
+      t.push(
+        B.jsx(
+          PhotoRainItem,
+          {
+            url: url,
+            startX: startX,
+            startZ: startZ,
+            speed: speed,
+            offsetY: offsetY,
+            seed: seed,
+            baseSize: 5.6,
+          },
+          `photo-mob-${idx}`,
+        ),
+      );
+    }
+    return t;
+  }
+
+  const zLayers = [-20, -8, 4, 16];
+  const xCols = [-26, -13, 0, 13, 26];
+  const itemBaseSize = 7.2;
   const total = zLayers.length * xCols.length;
   let idx = 0;
   for (let r = 0; r < zLayers.length; r++) {
@@ -7161,9 +7192,9 @@ function PhotoRain() {
       const url = photoUrls[idx % photoUrls.length];
       const startX = xCols[c];
       const startZ = zLayers[r];
-      const speed = isMob ? 3.8 : (4.5 + ((r * 3 + c * 7) % 5) * 0.5);
-      const offsetHash = isMob ? ((idx * 3) % total) : ((c * 3 + r * 5) % total);
-      const offsetY = (offsetHash / total) * (isMob ? 81 : 90);
+      const speed = 4.5 + ((r * 3 + c * 7) % 5) * 0.4;
+      const offsetHash = (c * 3 + r * 5) % total;
+      const offsetY = (offsetHash / total) * 90;
       const seed = r * 13 + c * 17;
       t.push(
         B.jsx(
