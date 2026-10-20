@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chúc Mừng 20/10 – Gửi Chi 💕</title>
+  <meta name="description" content="Món quà 20/10 đặc biệt và ý nghĩa nhất dành tặng Chi 💕. Nhấn vào để mở món quà này nhé!">
+  <link rel="icon" type="image/png" href="assets/icons/iconFallingLove.png">
+
+  <!-- Open Graph / Facebook / Zalo / Messenger -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chúc Mừng Ngày 20/10 – Dành Tặng Chi 💕">
+  <meta property="og:description" content="Chúc Chi ngày 20/10 thật nhiều niềm vui, luôn xinh đẹp, rạng rỡ và hạnh phúc ngập tràn! ✨">
+  <meta property="og:image" content="assets/image/bannerFallingLove.png">
+  <meta property="og:image:secure_url" content="assets/image/bannerFallingLove.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1152">
+  <meta property="og:image:height" content="815">
+  <meta property="og:image:alt" content="Falling Love Gift Banner">
+  <meta property="og:site_name" content="Falling Love Gift">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chúc Mừng Ngày 20/10 – Dành Tặng Chi 💕">
+  <meta name="twitter:description" content="Chúc Chi ngày 20/10 thật nhiều niềm vui, luôn xinh đẹp, rạng rỡ và hạnh phúc ngập tràn! ✨">
+  <meta name="twitter:image" content="assets/image/bannerFallingLove.png">
+  <meta name="twitter:image:alt" content="Falling Love Gift Banner">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Pacifico&family=Noto+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/loading.css">
+
+  <!-- pako — cần trước data-init.js để giải nén ?c= blob -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+
+  <style>
+    /* ── Intro screen wrapper ── */
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+      opacity: 1;
+      visibility: visible;
+    }
+    #intro-screen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* ── Love Rain screen ── */
+    #love-rain-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.2s ease 0.6s, visibility 1.2s ease 0.6s;
+      background: #0a0512;
+    }
+    #love-rain-screen.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    #love-rain-screen #starry-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Watermark chéo Xem Demo (chống ghi hình khi chưa thanh toán) ── */
+    .demo-watermark {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 99999;
+      pointer-events: none;
+      user-select: none;
+      background-repeat: repeat;
+      background-position: 0 0;
+    }
+  </style>
+
+  <!-- Chặn DevTools -->
+  <script src="js/detect-devtools.js"></script>
+  <script type="text/javascript">
+    // Bypass for developers
+    const keyName = 'key';
+    const keyValue = '9ac7ec230e0e4513578f309d6d3579ad';
+
+    // Handle via config
+    DisableDevtool({
+      tkName: keyName,
+      md5: keyValue,
+      interval: '100',
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- Watermark "Xem Demo" chéo bảo vệ bản quyền -->
+  <div id="demo-watermark" class="demo-watermark" style="display:none"></div>
+
+  <!-- ══════════════════════════════════════
+       INTRO SCREEN
+       ══════════════════════════════════════ -->
+  <div id="intro-screen">
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay">
+      <div class="loading-title">Đang chuẩn bị yêu thương gửi Chi...</div>
+      <div class="loading-heart">💕</div>
+      <div class="loading-text">Đang chuẩn bị quà 20/10 cho Chi...</div>
+      <div class="loading-bar"><div class="loading-progress" id="loading-progress"></div></div>
+      <div class="loading-percent" id="loading-percent">0%</div>
+    </div>
+
+    <!-- Tap hint -->
+    <div class="tap-hint" id="tapHint" style="display:none">
+      <div class="tap-hint-content">
+        <div class="tap-hint-arrow">↑</div>
+        <div class="tap-hint-text">Chạm vào để xem quà 20/10 nhé Chi 💖</div>
+        <div class="tap-hint-icon"></div>
+      </div>
+    </div>
+
+    <!-- Start button -->
+    <div id="start-wrap">
+      <div id="start-label">Nhấn giữ để bắt đầu</div>
+      <svg viewBox="0 0 68 68" aria-hidden="true">
+        <circle class="ring-pulse" cx="34" cy="34" r="28"/>
+        <circle class="ring-track" cx="34" cy="34" r="26"/>
+        <circle class="ring-fill"  id="ring-fill" cx="34" cy="34" r="26"/>
+      </svg>
+    </div>
+
+    <div id="text-container"></div>
+    <div class="shooting-stars" id="shooting-stars"></div>
+
+  </div><!-- /#intro-screen -->
+
+
+  <!-- ══════════════════════════════════════
+       LOVE RAIN SCREEN (ẩn, hiện sau intro)
+       ══════════════════════════════════════ -->
+  <div id="love-rain-screen">
+    <canvas id="starry-canvas"></canvas>
+    <div class="shooting-stars" id="shooting-stars-rain"></div>
+
+    <div
+      id="app"
+      data-page='{
+        "component": "views/home",
+        "props": {
+          "errors": {},
+          "name": "Chi",
+          "quote": {
+            "message": "Chúc mừng ngày Phụ nữ Việt Nam 20/10!",
+            "author": "Gửi Chi 💕"
+          },
+          "message": "Chúc mừng ngày 20/10 nhé Chi! 💐",
+          "client": {
+            "fontName": "Mali",
+            "color": "#ff6b9d",
+            "messages": [
+              "Chúc mừng ngày 20/10, Chi nhé! 💐",
+              "Chúc Chi luôn xinh đẹp, rạng rỡ và hạnh phúc 💕",
+              "Mỗi ngày của Chi đều ngập tràn niềm vui ✨",
+              "Mong những điều ngọt ngào nhất luôn đến với Chi 🌸",
+              "Yêu thương và trân trọng Chi thật nhiều 💖"
+            ],
+            "music": "assets/music/loveMusic/Hngle - Tìm em ft (mp3cut.net).mp3",
+            "images": [
+              "assets/image/anh2.jpg",
+              "assets/image/anhDoi2.jpg",
+              "assets/image/doi2.jpg",
+              "assets/image/doi3.jpg",
+              "assets/image/doi4.jpg",
+              "assets/image/doi5.jpg"
+            ]
+          },
+          "clientId": "/"
+        },
+        "url": "/",
+        "version": "",
+        "clearHistory": false,
+        "encryptHistory": false
+      }'
+    ></div>
+  </div><!-- /#love-rain-screen -->
+
+  <!-- ══════════════════════════════════════
+       MÀN CHỜ TẢI DỮ LIỆU (Loading Screen Overlay)
+       Hiển thị giữa Intro và Love Rain
+       ══════════════════════════════════════ -->
+  <div
+    id="transition-loading-overlay"
+    class="loading-overlay"
+    hidden
+    role="status"
+    aria-live="polite"
+    aria-busy="true"
+    aria-label="Đang tải dữ liệu"
+  >
+    <div class="loading-card">
+      <p class="loading-title" id="loading-title">Đang chuẩn bị điều bất ngờ 💕</p>
+      <p class="loading-sub" id="loading-sub">Đang tải ảnh và câu chúc...</p>
+      <div class="loading-track" aria-hidden="true">
+        <div id="loading-bar" class="loading-bar" style="width: 0%"></div>
+      </div>
+      <p class="loading-pct" id="loading-pct">0%</p>
+    </div>
+  </div>
+
+
+  <!--
+    ┌─────────────────────────────────────────────────────────┐
+    │  Script load order (quan trọng — đừng đổi thứ tự)      │
+    │  0. app-config.js — cấu hình API base URL              │
+    │  1. data-init.js  — khởi tạo window.Heartlove, v.v.    │
+    │  2. shooting-stars.js — tạo sao băng trên DOM           │
+    │  3. enhanced-effects.js — Three.js particle engine      │
+    │  4. start-button.js — nút giữ/chạm để bắt đầu          │
+    └─────────────────────────────────────────────────────────┘
+  -->
+  <script src="lib/app-config.js"></script>
+  <script src="js/preview-storage.js"></script>
+  <script src="js/data-init.js"></script>
+  <script src="js/shooting-stars.js"></script>
+  <script type="module" src="js/enhanced-effects.js"></script>
+  <script src="js/start-button.js"></script>
+
+  <!-- Module quản lý Màn chờ Tải Dữ liệu (theo LOADING_SCREEN_GUIDE.md) -->
+  <script src="js/loading-manager.js"></script>
+
+  <!-- Chuyển sang màn Love Rain khi hiệu ứng chữ kết thúc -->
+  <script>
+    window.addEventListener('textMessagesComplete', async function () {
+      var intro    = document.getElementById('intro-screen');
+      var loveRain = document.getElementById('love-rain-screen');
+
+      // 1. Mở màn hình chờ LoadingScreen (z-index 9999) ngay lập tức
+      // Che phủ toàn màn hình, xóa bỏ hoàn toàn hiện tượng màn hình đen
+      LoadingScreen.show('Đang chuẩn bị điều bất ngờ cho Chi 💕', 'Đang kết nối yêu thương...');
+      LoadingScreen.setProgress(15);
+
+      // Fade out và ẩn intro screen phía sau loading overlay
+      if (intro) {
+        intro.classList.add('fade-out');
+        setTimeout(function () {
+          intro.style.display = 'none';
+        }, 1000);
+      }
+
+      // Kích hoạt love-rain screen sẵn sàng phía dưới loading
+      if (loveRain) {
+        loveRain.classList.add('visible');
+      }
+
+      try {
+        // 2. Chờ Promise dữ liệu từ API nếu có (15% -> 35%)
+        LoadingScreen.setMessage('Đang đọc lời chúc 20/10 dành cho Chi...');
+        LoadingScreen.setProgress(25);
+        if (window._fallingLoveReady) {
+          await Promise.race([
+            window._fallingLoveReady,
+            new Promise(function (r) { setTimeout(r, 2000); })
+          ]);
+        }
+        LoadingScreen.setProgress(35);
+
+        // 3. Lấy danh sách ảnh cần tải trước
+        var defaultPhotos = [
+          "assets/image/anh2.jpg",
+          "assets/image/anhDoi2.jpg",
+          "assets/image/doi2.jpg",
+          "assets/image/doi3.jpg",
+          "assets/image/doi4.jpg",
+          "assets/image/doi5.jpg"
+        ];
+        var photoUrls = defaultPhotos;
+        if (window.LOVEGIFT_IMAGES && window.LOVEGIFT_IMAGES.length > 0) {
+          photoUrls = window.LOVEGIFT_IMAGES;
+        } else if (window.FallingLoveData && window.FallingLoveData.images && window.FallingLoveData.images.length > 0) {
+          photoUrls = window.FallingLoveData.images;
+        } else if (window.Heartlove && window.Heartlove.data && window.Heartlove.data.images && window.Heartlove.data.images.length > 0) {
+          photoUrls = window.Heartlove.data.images;
+        }
+
+        // 4. Preload toàn bộ ảnh vào cache trình duyệt (35% -> 70%)
+        if (photoUrls && photoUrls.length > 0 && !window.LOVEGIFT_NO_IMAGES) {
+          LoadingScreen.setMessage('Đang tải hình ảnh kỷ niệm (0/' + photoUrls.length + ')...');
+          var loaded = 0;
+          await Promise.all(
+            photoUrls.map(async function (url) {
+              await LoadingScreen.preloadImage(url);
+              loaded++;
+              var pct = 35 + Math.round((loaded / photoUrls.length) * 35);
+              LoadingScreen.setProgress(pct);
+              LoadingScreen.setMessage('Đang tải hình ảnh kỷ niệm (' + loaded + '/' + photoUrls.length + ')...');
+            })
+          );
+        } else {
+          LoadingScreen.setProgress(70);
+        }
+
+        // 5. Nạp scripts: loader.js và starry-sky.js (70% -> 85%)
+        LoadingScreen.setMessage('Khởi tạo bầu trời ngàn sao...');
+        LoadingScreen.setProgress(75);
+
+        await Promise.all([
+          LoadingScreen.loadScript('js/loader.js'),
+          LoadingScreen.loadScript('js/starry-sky.js', true)
+        ]);
+        LoadingScreen.setProgress(85);
+
+        // 6. Chờ canvas của cảnh mưa tình yêu xuất hiện trong DOM (85% -> 98%)
+        LoadingScreen.setMessage('Chuẩn bị mưa yêu thương dành cho Chi...');
+        await new Promise(function (resolve) {
+          var attempts = 0;
+          var checkTimer = setInterval(function () {
+            attempts++;
+            var app = document.getElementById('app');
+            var hasCanvas = app && app.querySelector('canvas');
+            if (hasCanvas || attempts >= 35) { // tối đa ~3.5s
+              clearInterval(checkTimer);
+              resolve();
+            }
+          }, 100);
+        });
+
+        LoadingScreen.setProgress(100);
+        LoadingScreen.setMessage('Món quà 20/10 cho Chi đã sẵn sàng! 💕');
+        await LoadingScreen.waitFrames(4);
+
+        // 7. Mở màn hình Love Rain: Dữ liệu và hình ảnh đã sẵn sàng hiển thị luôn!
+        setTimeout(function () {
+          LoadingScreen.hide();
+        }, 350);
+
+      } catch (err) {
+        console.error('Lỗi trong quá trình chuẩn bị màn cuối:', err);
+        LoadingScreen.setProgress(100);
+        setTimeout(function () {
+          LoadingScreen.hide();
+        }, 400);
+      }
+    }, { once: true });
+  </script>
+
+  <!-- Script kích hoạt Watermark chéo khi ở chế độ Xem Demo -->
+  <script>
+    (function initWatermark() {
+      var params = new URLSearchParams(window.location.search);
+      var isPreview = params.has('preview') || params.has('demo');
+      if (!isPreview) return;
+
+      var wm = document.getElementById('demo-watermark');
+      if (!wm) return;
+
+      try {
+        var canvas = document.createElement('canvas');
+        canvas.width = 300;
+        canvas.height = 190;
+        var ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.translate(150, 95);
+          ctx.rotate(-28 * Math.PI / 180);
+
+          // Đường viền hồng nhạt
+          ctx.font = 'bold 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.strokeStyle = 'rgba(255, 105, 180, 0.28)';
+          ctx.lineWidth = 2.5;
+          ctx.strokeText('Xem Demo', 0, 0);
+
+          // Lớp chữ trắng mờ
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.24)';
+          ctx.fillText('Xem Demo', 0, 0);
+
+          wm.style.backgroundImage = 'url(' + canvas.toDataURL('image/png') + ')';
+        }
+      } catch (e) {
+        console.warn('Lỗi tạo watermark:', e);
+      }
+
+      wm.style.display = 'block';
+    })();
+  </script>
+
+</body>
+</html>

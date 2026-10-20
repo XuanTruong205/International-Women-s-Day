@@ -1,0 +1,5938 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tạo Quà Tặng – Falling Love Gift 💕</title>
+  <meta name="description"
+    content="Tạo quà tặng yêu thương cá nhân hoá – Falling Love Gift. Gửi trọn yêu thương qua những món quà xinh đẹp.">
+  <link rel="icon" type="image/png" href="assets/icons/iconFallingLove.png">
+
+  <!-- Open Graph / Facebook / Zalo / Messenger -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tạo Quà Tặng – Falling Love Gift 💕">
+  <meta property="og:description" content="Tạo quà tặng yêu thương cá nhân hoá – Falling Love Gift. Gửi trọn yêu thương qua những món quà xinh đẹp.">
+  <meta property="og:image" content="assets/image/bannerFallingLove.png">
+  <meta property="og:image:secure_url" content="assets/image/bannerFallingLove.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1152">
+  <meta property="og:image:height" content="815">
+  <meta property="og:image:alt" content="Falling Love Gift Banner">
+  <meta property="og:site_name" content="Falling Love Gift">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tạo Quà Tặng – Falling Love Gift 💕">
+  <meta name="twitter:description" content="Tạo quà tặng yêu thương cá nhân hoá – Falling Love Gift. Gửi trọn yêu thương qua những món quà xinh đẹp.">
+  <meta name="twitter:image" content="assets/image/bannerFallingLove.png">
+  <meta name="twitter:image:alt" content="Falling Love Gift Banner">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Mali:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ── Reset & Base ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Payment Checkout Dialog ── */
+    .payment-checkout-overlay {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .payment-checkout-box {
+      width: 95vw;
+      max-width: 560px;
+      max-height: 92vh;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.25), 0 0 0 1px rgba(255, 107, 157, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: payDialogIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      position: relative;
+    }
+
+    @keyframes payDialogIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .payment-dialog-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .payment-dialog-close:hover {
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    .payment-checkout-body {
+      flex: 1;
+      position: relative;
+      min-height: 500px;
+      background: #f8f8f8;
+    }
+
+    .payment-iframe-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--pink-500);
+      font-size: 0.95rem;
+      z-index: 1;
+      background: #fff;
+      transition: opacity 0.3s;
+    }
+
+    .payment-iframe-loading i {
+      font-size: 28px;
+    }
+
+    .payment-iframe-loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .payment-iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      border: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    .payment-checkout-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-top: 1.5px solid rgba(255, 173, 210, 0.25);
+      background: #fff;
+    }
+
+    .payment-footer-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    .payment-footer-hint i {
+      color: var(--pink-500);
+    }
+
+    .btn-payment-close {
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255, 107, 157, 0.3);
+      background: #fff;
+      color: var(--text-mid);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-payment-close:hover {
+      background: var(--pink-100);
+      border-color: var(--pink-400);
+      color: var(--pink-600);
+    }
+
+    @media (max-width: 520px) {
+      .payment-checkout-box {
+        max-width: 100vw;
+        border-radius: 16px;
+      }
+
+      .payment-checkout-header {
+        padding: 12px 14px;
+      }
+
+      .payment-checkout-footer {
+        padding: 10px 14px;
+      }
+
+      .payment-footer-hint {
+        font-size: 0.72rem;
+      }
+    }
+
+    :root {
+      --pink-100: #fff0f5;
+      --pink-200: #ffd6e7;
+      --pink-300: #ffadd2;
+      --pink-400: #ff85b3;
+      --pink-500: #ff6b9d;
+      --pink-600: #e8528a;
+      --pink-700: #c73b72;
+      --rose-soft: #fff5f8;
+      --white: #ffffff;
+      --text-dark: #3d1a2e;
+      --text-mid: #7a4060;
+      --text-light: #b07090;
+      --shadow-pink: 0 4px 24px rgba(255, 107, 157, 0.18);
+      --shadow-card: 0 8px 40px rgba(255, 107, 157, 0.12);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --transition: 0.25s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 16px;
+      background: linear-gradient(135deg, #fff0f5 0%, #fde8f0 40%, #fff5f8 100%);
+      min-height: 100vh;
+      color: var(--text-dark);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 10% 20%, rgba(255, 173, 210, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 600px at 90% 80%, rgba(255, 107, 157, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 300px at 50% 10%, rgba(255, 214, 231, 0.2) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart-particle {
+      position: absolute;
+      opacity: 0;
+      animation: floatHeart linear infinite;
+      font-size: 14px;
+      filter: blur(0.5px);
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(110vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.4;
+      }
+
+      90% {
+        opacity: 0.2;
+      }
+
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 52px 20px 40px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 107, 157, 0.12);
+      border: 1px solid rgba(255, 107, 157, 0.3);
+      color: var(--pink-600);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1.5;
+      padding-bottom: 16px;
+      background: linear-gradient(135deg, #e8528a 0%, #ff6b9d 45%, #ff85b3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 2px 12px rgba(255, 107, 157, 0.25));
+    }
+
+    .hero-slogan {
+      font-family: 'Mali', cursive;
+      font-size: clamp(1.12rem, 3vw, 1.38rem);
+      color: var(--text-mid);
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 28px;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff6b9d, #e8528a);
+      color: #fff;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 14px 34px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(255, 107, 157, 0.38);
+      transition: var(--transition);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-preview:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 32px rgba(255, 107, 157, 0.5);
+    }
+
+    /* ── GOOGLE LOGIN BOX ── */
+    .google-login-wrapper {
+      margin: 0 auto 40px;
+      max-width: 520px;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .login-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid rgba(255, 173, 210, 0.6);
+      border-radius: 30px;
+      padding: 42px 36px 40px;
+      text-align: center;
+      box-shadow:
+        0 24px 64px rgba(255, 107, 157, 0.22),
+        0 4px 16px rgba(255, 107, 157, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      animation: loginCardAppear 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .login-card:hover {
+      box-shadow:
+        0 28px 72px rgba(255, 107, 157, 0.28),
+        0 6px 20px rgba(255, 107, 157, 0.12),
+        0 0 0 1px rgba(255, 255, 255, 0.95) inset;
+      transform: translateY(-2px);
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255, 107, 157, 0.14) 0%, transparent 60%);
+      pointer-events: none;
+      animation: ambientRotate 18s linear infinite;
+    }
+
+    @keyframes ambientRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes loginCardAppear {
+      0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.96);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .login-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.3rem, 5.5vw, 2.9rem);
+      color: var(--pink-600);
+      margin-bottom: 16px;
+      line-height: 1.25;
+      text-shadow: 0 3px 18px rgba(255, 107, 157, 0.28);
+      letter-spacing: 0.02em;
+    }
+
+    .login-slogan {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      margin-bottom: 34px;
+      line-height: 1.55;
+    }
+
+    /* ── REDESIGNED SLEEK GOOGLE BUTTON ── */
+    .btn-google-login {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 360px;
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 173, 210, 0.7);
+      border-radius: 50px;
+      padding: 13px 28px;
+      cursor: pointer;
+      box-shadow:
+        0 8px 24px rgba(255, 107, 157, 0.16),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    /* Hiệu ứng tia sáng quét nhẹ khi rê chuột */
+    .btn-google-login::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), rgba(255, 173, 210, 0.4), transparent);
+      transform: skewX(-25deg);
+      transition: left 0.7s ease;
+      pointer-events: none;
+    }
+
+    .btn-google-login:hover {
+      border-color: #4285f4;
+      background: #ffffff;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 14px 36px rgba(66, 133, 244, 0.22),
+        0 6px 18px rgba(255, 107, 157, 0.2),
+        0 0 0 2.5px rgba(66, 133, 244, 0.25);
+    }
+
+    .btn-google-login:hover::before {
+      left: 140%;
+    }
+
+    .btn-google-login:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-google-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .btn-google-login:hover .btn-google-icon-box {
+      transform: scale(1.12) rotate(8deg);
+      background: #ffffff;
+    }
+
+    .btn-google-text {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #374151;
+      letter-spacing: -0.01em;
+      transition: color 0.25s ease;
+    }
+
+    .btn-google-login:hover .btn-google-text {
+      color: #1a73e8;
+    }
+
+    .btn-google-login.loading,
+    .btn-google-login.is-loading {
+      pointer-events: none;
+      opacity: 0.82;
+      cursor: wait;
+    }
+
+    .btn-google-login:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    /* Animation rung cảnh báo khi user chưa đăng nhập (theo huong-dan-dang-nhap-google.md) */
+    @keyframes authShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .auth-highlight-shake {
+      animation: authShake 0.6s ease-in-out !important;
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25) !important;
+    }
+
+    /* ── GOOGLE LOGIN ERROR ALERT ── */
+    .login-error-msg {
+      margin-top: 18px;
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: rgba(254, 242, 242, 0.95);
+      border: 1px solid rgba(248, 180, 180, 0.8);
+      color: #9b1c1c;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.45;
+      text-align: center;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.1);
+      animation: errorFadeIn 0.3s ease;
+    }
+
+    .login-error-msg[hidden] {
+      display: none !important;
+    }
+
+    @keyframes errorFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── CREATION WRAPPER ANIMATION ── */
+    .creation-wrapper {
+      animation: unlockSections 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes unlockSections {
+      0% {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── USER BAR ── */
+    .user-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 173, 210, 0.4);
+      border-radius: var(--radius-md);
+      padding: 12px 20px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-pink);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffadd2, #ff6b9d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 3px 12px rgba(255, 107, 157, 0.3);
+      overflow: hidden;
+    }
+
+    .user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .user-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.25;
+    }
+
+    .user-email {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 260px;
+      line-height: 1.2;
+    }
+
+    .user-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-user {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 9px 17px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-history {
+      background: rgba(255, 107, 157, 0.1);
+      color: var(--pink-600);
+      border: 1px solid rgba(255, 107, 157, 0.25);
+    }
+
+    .btn-history:hover {
+      background: rgba(255, 107, 157, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .btn-logout {
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text-mid);
+      border: 1px solid rgba(176, 112, 144, 0.25);
+    }
+
+    .btn-logout:hover {
+      background: #fff0f5;
+      color: var(--pink-600);
+      transform: translateY(-1px);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 173, 210, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition);
+    }
+
+    #section-intro {
+      position: relative;
+      z-index: 10;
+      overflow: visible;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 48px rgba(255, 107, 157, 0.18);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff85b3, #ff6b9d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.28rem;
+      font-weight: 700;
+      font-style: italic;
+      background: linear-gradient(135deg, #e8528a 0%, #ff6b9d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.01em;
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* ── Badges & Subgroups for Mandatory & Optional Fields ── */
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge-field-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-style: normal;
+      padding: 3px 10px;
+      border-radius: 20px;
+      vertical-align: middle;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+
+    .badge-field-status.required {
+      background: linear-gradient(135deg, rgba(255, 77, 136, 0.16), rgba(255, 107, 157, 0.12));
+      color: #e83e8c;
+      border: 1px solid rgba(255, 77, 136, 0.4);
+    }
+
+    .badge-field-status.optional {
+      background: rgba(120, 100, 115, 0.09);
+      color: #7a606e;
+      border: 1px solid rgba(140, 115, 130, 0.28);
+    }
+
+    .badge-field-status i {
+      font-size: 0.68rem;
+    }
+
+    .music-label-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .subgroup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .subgroup-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-hint {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      background: rgba(255, 107, 157, 0.07);
+      border-left: 3px solid var(--pink-300);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    /* ── Input rows ── */
+    .input-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideIn 0.25s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .input-index {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffadd2, #ff85b3);
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .input-field {
+      flex: 1;
+      border: 1.5px solid rgba(255, 173, 210, 0.5);
+      border-radius: var(--radius-sm);
+      padding: 13px 16px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.9);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .input-field::placeholder {
+      color: var(--text-light);
+    }
+
+    .input-field:focus {
+      border-color: var(--pink-400);
+      box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.12);
+      background: #fff;
+    }
+
+    .input-item-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .input-field.input-error {
+      border-color: #ef4444 !important;
+      background: #fff8f8 !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+    }
+
+    .intro-error-msg {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #dc2626;
+      font-weight: 500;
+      padding-left: 4px;
+      line-height: 1.4;
+      animation: introErrorSlide 0.2s ease;
+    }
+
+    @keyframes introErrorSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-delete {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 107, 157, 0.1);
+      color: var(--pink-500);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .btn-delete:hover {
+      background: var(--pink-500);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .btn-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 107, 157, 0.08);
+      color: var(--pink-600);
+      border: 1.5px dashed rgba(255, 107, 157, 0.45);
+      border-radius: var(--radius-sm);
+      padding: 12px 24px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 600;
+      font-size: 0.97rem;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-add:hover {
+      background: rgba(255, 107, 157, 0.14);
+      border-color: var(--pink-400);
+      transform: translateY(-1px);
+    }
+
+    .btn-add:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .count-badge {
+      display: inline-block;
+      background: var(--pink-500);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 50px;
+      margin-left: 6px;
+    }
+
+    /* ── Image upload ── */
+    .upload-zone {
+      border: 2px dashed rgba(255, 107, 157, 0.4);
+      border-radius: var(--radius-md);
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      background: rgba(255, 240, 245, 0.5);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: var(--pink-400);
+      background: rgba(255, 107, 157, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffadd2, #ff6b9d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 1.4rem;
+      color: white;
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.25);
+    }
+
+    .upload-title {
+      font-weight: 700;
+      font-size: 1.08rem;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .upload-desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .upload-limit {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--pink-600);
+      font-weight: 600;
+      background: rgba(255, 107, 157, 0.1);
+      padding: 4px 12px;
+      border-radius: 50px;
+    }
+
+    /* ── Image preview grid ── */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .image-preview-item {
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 1;
+      animation: slideIn 0.25s ease;
+      box-shadow: 0 3px 12px rgba(255, 107, 157, 0.18);
+    }
+
+    .image-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-remove {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--pink-600);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    .image-remove:hover {
+      background: var(--pink-500);
+      color: white;
+      transform: scale(1.15);
+    }
+
+    .image-count-info {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-align: right;
+      margin-bottom: 14px;
+    }
+
+    .image-count-info span {
+      font-weight: 700;
+      color: var(--pink-600);
+    }
+
+    /* ── Divider ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 4px 0 20px;
+      color: var(--text-light);
+      font-size: 0.75rem;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 173, 210, 0.5), transparent);
+    }
+
+    /* ── Submit ── */
+    .submit-area {
+      text-align: center;
+      padding-top: 8px;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #ff6b9d 0%, #e8528a 100%);
+      color: white;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 700;
+      font-size: 1.12rem;
+      padding: 18px 56px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(255, 107, 157, 0.42);
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 42px rgba(255, 107, 157, 0.55);
+    }
+
+    .btn-submit:hover::before {
+      opacity: 1;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .submit-note {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 14px;
+    }
+
+    /* ── PAYMENT SECTION ── */
+    .payment-method-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .radio-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 22px 16px 18px;
+      border: 2px solid rgba(255, 173, 210, 0.35);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.65);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+
+    .radio-option::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.07), rgba(255, 133, 179, 0.04));
+      opacity: 0;
+      transition: var(--transition);
+      pointer-events: none;
+    }
+
+    .radio-option:hover {
+      border-color: var(--pink-400);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.14);
+    }
+
+    .radio-option:hover::before {
+      opacity: 1;
+    }
+
+    .radio-option.selected {
+      border-color: var(--pink-500);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.15), 0 8px 28px rgba(255, 107, 157, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .radio-option.selected::before {
+      opacity: 1;
+    }
+
+    .radio-option-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: rgba(255, 173, 210, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--pink-400);
+      transition: var(--transition);
+    }
+
+    .radio-option.selected .radio-option-icon {
+      background: linear-gradient(135deg, #ff85b3, #ff6b9d);
+      color: white;
+      box-shadow: 0 6px 18px rgba(255, 107, 157, 0.35);
+    }
+
+    .radio-option-check {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 173, 210, 0.5);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .radio-option.selected .radio-option-check {
+      background: var(--pink-500);
+      border-color: var(--pink-500);
+      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.4);
+    }
+
+    .radio-body {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .radio-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .radio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 6px;
+      justify-content: center;
+    }
+
+    .radio-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 50px;
+      background: rgba(255, 107, 157, 0.1);
+      color: var(--pink-600);
+      border: 1px solid rgba(255, 107, 157, 0.2);
+    }
+
+    .radio-desc {
+      font-size: 0.76rem;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    /* Checkbox forever */
+    .checkbox-forever {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 17px 20px;
+      border: 1.5px solid rgba(255, 173, 210, 0.4);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.6);
+      margin-bottom: 26px;
+    }
+
+    .checkbox-forever:hover {
+      border-color: var(--pink-400);
+      background: rgba(255, 240, 245, 0.8);
+    }
+
+    .checkbox-forever.checked {
+      border-color: var(--pink-500);
+      background: rgba(255, 107, 157, 0.06);
+      box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    }
+
+    .checkbox-forever input[type="checkbox"] {
+      display: none;
+    }
+
+    .checkbox-custom {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--pink-300);
+      background: white;
+      flex-shrink: 0;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 0.72rem;
+      color: white;
+    }
+
+    .checkbox-forever.checked .checkbox-custom {
+      background: var(--pink-500);
+      border-color: var(--pink-500);
+    }
+
+    .forever-body {
+      flex: 1;
+    }
+
+    .forever-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+
+    .forever-price {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6b9d, #e8528a);
+      color: white;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 50px;
+    }
+
+    .forever-desc {
+      font-size: 0.83rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    /* ── Chi tiết thanh toán — Premium ── */
+    .payment-detail {
+      position: relative;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow:
+        0 2px 16px rgba(255, 107, 157, 0.08),
+        0 8px 40px rgba(255, 107, 157, 0.06);
+    }
+
+    /* animated gradient border */
+    .payment-detail::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      padding: 1.5px;
+      background: linear-gradient(135deg, var(--pink-300), var(--pink-500), var(--pink-300));
+      background-size: 200% 200%;
+      animation: borderShimmer 4s ease infinite;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    @keyframes borderShimmer {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 22px;
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      border-bottom: 1px solid rgba(255, 173, 210, 0.12);
+      transition: background 0.2s ease;
+    }
+
+    .detail-row:first-child {
+      padding-top: 20px;
+    }
+
+    .detail-row:hover {
+      background: rgba(255, 107, 157, 0.03);
+    }
+
+    .detail-row .label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+
+    .detail-row .label i {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 173, 210, 0.25), rgba(255, 107, 157, 0.12));
+      color: var(--pink-500);
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+
+    .detail-row .price {
+      font-weight: 700;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+    }
+
+    .detail-row .price.free {
+      color: #2ecc71;
+      font-weight: 600;
+    }
+
+    .detail-row .price.added {
+      color: var(--pink-600);
+    }
+
+    /* ── Tổng cộng — hero section ── */
+    .detail-total {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 22px;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.08) 0%, rgba(232, 82, 138, 0.05) 100%);
+      border-top: 1.5px solid rgba(255, 107, 157, 0.18);
+    }
+
+    .detail-total::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 22px;
+      right: 22px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--pink-300), transparent);
+      opacity: 0.5;
+    }
+
+    .total-label {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .total-label i {
+      color: var(--pink-500);
+      font-size: 0.9rem;
+    }
+
+    .total-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e8528a 0%, #ff6b9d 50%, #ff85b3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 8px rgba(255, 107, 157, 0.2));
+      animation: priceGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes priceGlow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 2px 8px rgba(255, 107, 157, 0.15));
+      }
+
+      50% {
+        filter: drop-shadow(0 2px 16px rgba(255, 107, 157, 0.35));
+      }
+    }
+
+    /* ── Action buttons — Premium ── */
+    .action-buttons {
+      display: flex;
+      gap: 14px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--pink-600);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 700;
+      font-size: 1.02rem;
+      padding: 17px 24px;
+      border: 2px solid rgba(255, 107, 157, 0.3);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(.4, 0, .2, 1);
+      letter-spacing: 0.02em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-secondary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.06), rgba(255, 173, 210, 0.08));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--pink-400);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(255, 107, 157, 0.18);
+    }
+
+    .btn-secondary:hover::before {
+      opacity: 1;
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-pay {
+      flex: 1.4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #ff6b9d 0%, #e8528a 50%, #c73b72 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+      color: white;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 17px 24px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow:
+        0 6px 24px rgba(255, 107, 157, 0.35),
+        0 2px 8px rgba(232, 82, 138, 0.2);
+      transition: all 0.3s cubic-bezier(.4, 0, .2, 1);
+      letter-spacing: 0.03em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .btn-pay::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: skewX(-15deg);
+      animation: btnShimmer 3.5s ease-in-out infinite;
+    }
+
+    @keyframes btnShimmer {
+      0% {
+        left: -60%;
+      }
+
+      30%,
+      100% {
+        left: 120%;
+      }
+    }
+
+    .btn-pay:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        0 12px 40px rgba(255, 107, 157, 0.45),
+        0 4px 12px rgba(232, 82, 138, 0.3);
+    }
+
+    .btn-pay:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    /* ── Lưu ý thanh toán ── */
+    .payment-note {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: rgba(255, 240, 245, 0.6);
+      border: 1px solid rgba(255, 173, 210, 0.3);
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    .payment-note strong {
+      color: var(--pink-600);
+      font-weight: 700;
+    }
+
+    .payment-note-link {
+      color: var(--pink-600);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .payment-note-link:hover {
+      color: var(--pink-700);
+      text-decoration-color: var(--pink-700);
+    }
+
+    /* ── Footer liên hệ ── */
+    .contact-footer {
+      margin-top: 20px;
+      padding: 18px 20px;
+      background: rgba(255, 240, 245, 0.6);
+      border: 1px solid rgba(255, 173, 210, 0.3);
+      border-radius: var(--radius-sm);
+    }
+
+    .contact-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 14px;
+    }
+
+    .contact-icon-link {
+      display: flex;
+      transition: all 0.3s ease;
+    }
+
+    .contact-icon-link:hover {
+      transform: translateY(-2px) scale(1.08);
+    }
+
+    .contact-icon-link img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .contact-follow {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ── Nhạc nền ── */
+    .music-section {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 173, 210, 0.25);
+    }
+
+    .music-label {
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .music-label .required {
+      color: var(--pink-500);
+    }
+
+    .music-sublabel {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .music-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    /* ── Custom Dropdown ── */
+    .custom-dropdown {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 173, 210, 0.45);
+      border-radius: var(--radius-sm);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .dropdown-toggle:hover {
+      border-color: var(--pink-400);
+      box-shadow: 0 2px 12px rgba(255, 107, 157, 0.12);
+    }
+
+    .dropdown-toggle.open {
+      border-color: var(--pink-400);
+      box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1), 0 4px 16px rgba(255, 107, 157, 0.1);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+
+    .dropdown-toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .dropdown-toggle-left i {
+      color: var(--pink-500);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .dropdown-toggle-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dropdown-toggle-text.placeholder {
+      color: var(--text-light);
+    }
+
+    .dropdown-arrow {
+      color: var(--pink-400);
+      font-size: 0.7rem;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .dropdown-toggle.open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 173, 210, 0.4);
+      border-top: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 999;
+      box-shadow: 0 12px 36px rgba(255, 107, 157, 0.15);
+      display: none;
+      animation: dropdownOpen 0.25s ease;
+    }
+
+    .dropdown-list.open {
+      display: block;
+    }
+
+    /* Drop up */
+    .dropdown-list.drop-up {
+      top: auto;
+      bottom: 100%;
+      border-top: 1.5px solid rgba(255, 173, 210, 0.4);
+      border-bottom: none;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      box-shadow: 0 -12px 36px rgba(255, 107, 157, 0.15);
+      animation: dropdownOpenUp 0.25s ease;
+    }
+
+    .dropdown-toggle.open-up {
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+
+    @keyframes dropdownOpenUp {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes dropdownOpen {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border-bottom: 1px solid rgba(255, 173, 210, 0.1);
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(255, 107, 157, 0.06);
+      color: var(--text-dark);
+    }
+
+    .dropdown-item.selected {
+      background: rgba(255, 107, 157, 0.1);
+      color: var(--pink-600);
+      font-weight: 600;
+    }
+
+    .dropdown-item-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, rgba(255, 173, 210, 0.3), rgba(255, 107, 157, 0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .dropdown-item-icon i {
+      font-size: 0.72rem;
+      color: var(--pink-500);
+    }
+
+    .dropdown-item-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* custom scrollbar for dropdown */
+    .dropdown-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .dropdown-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .dropdown-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 107, 157, 0.2);
+      border-radius: 10px;
+    }
+
+    .dropdown-list::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 107, 157, 0.4);
+    }
+
+    .btn-music-file {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 18px;
+      background: rgba(255, 107, 157, 0.08);
+      color: var(--pink-600);
+      border: 1.5px solid rgba(255, 107, 157, 0.3);
+      border-radius: var(--radius-sm);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-music-file:hover {
+      background: rgba(255, 107, 157, 0.14);
+      border-color: var(--pink-400);
+      transform: translateY(-1px);
+    }
+
+    .btn-music-file input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .btn-guide {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 11px 16px;
+      background: transparent;
+      color: var(--pink-500);
+      border: 1.5px solid rgba(255, 107, 157, 0.25);
+      border-radius: var(--radius-sm);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-guide:hover {
+      background: rgba(255, 107, 157, 0.06);
+      border-color: var(--pink-400);
+    }
+
+    /* ── Audio Player ── */
+    .audio-player {
+      display: none;
+      background: linear-gradient(135deg, rgba(255, 240, 245, 0.8), rgba(255, 255, 255, 0.9));
+      border: 1.5px solid rgba(255, 173, 210, 0.35);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      animation: slideIn 0.3s ease;
+    }
+
+    .audio-player.visible {
+      display: block;
+    }
+
+    .player-top {
+      margin-bottom: 10px;
+    }
+
+    .player-song-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-song-name i {
+      color: var(--pink-500);
+      margin-right: 6px;
+      font-size: 0.85rem;
+    }
+
+    .player-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .player-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #ff6b9d, #e8528a);
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 12px rgba(255, 107, 157, 0.3);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .player-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 5px 18px rgba(255, 107, 157, 0.4);
+    }
+
+    .player-btn:active {
+      transform: scale(0.95);
+    }
+
+    .player-time {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .player-progress-wrap {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 173, 210, 0.25);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player-progress-wrap:hover {
+      height: 8px;
+    }
+
+    .player-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b9d, #e8528a);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.15s linear;
+      position: relative;
+    }
+
+    .player-progress::after {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--pink-500);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .player-progress-wrap:hover .player-progress::after {
+      opacity: 1;
+    }
+
+    .dialog-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 0, 10, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .dialog-overlay.open {
+      display: flex !important;
+      animation: dlgFadeIn 0.3s ease;
+    }
+
+    @keyframes dlgFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .dialog-box {
+      position: relative;
+      background: #fff;
+      border-radius: 22px;
+      max-width: 580px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow:
+        0 0 0 1px rgba(255, 107, 157, 0.1),
+        0 30px 90px rgba(255, 107, 157, 0.22),
+        0 10px 30px rgba(0, 0, 0, 0.08);
+      animation: dlgSlide 0.4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .dialog-box::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .dialog-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 107, 157, 0.2);
+      border-radius: 10px;
+    }
+
+    @keyframes dlgSlide {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Close */
+    .dialog-close-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--pink-500);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dialog-close-icon:hover {
+      background: white;
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 4px 16px rgba(255, 107, 157, 0.25);
+    }
+
+    /* Header */
+    .dialog-header {
+      padding: 28px 28px 18px;
+      border-bottom: 1px solid rgba(255, 173, 210, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .dialog-header-emoji {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      line-height: 1;
+      animation: emojiFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes emojiFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .dialog-header-text {
+      flex: 1;
+    }
+
+    .dialog-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e8528a, #ff6b9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 2px;
+    }
+
+    .dialog-title-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .dialog-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    .dialog-subtitle strong {
+      color: var(--pink-600);
+    }
+
+    /* Body */
+    .dialog-body {
+      padding: 22px 22px 20px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Guide Cards */
+    .guide-card {
+      flex: 1;
+      min-width: 210px;
+      border-radius: 14px;
+      padding: 20px 18px 18px;
+      transition: all 0.25s ease;
+      position: relative;
+      border: 1px solid rgba(255, 173, 210, 0.25);
+      background: rgba(255, 248, 250, 0.6);
+    }
+
+    .guide-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 107, 157, 0.1);
+      border-color: rgba(255, 107, 157, 0.3);
+    }
+
+    .guide-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .guide-card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .guide-card-icon.yt {
+      background: linear-gradient(135deg, #ff4444, #cc0000);
+      color: white;
+    }
+
+    .guide-card-icon.tt {
+      background: linear-gradient(135deg, #25f4ee, #000);
+      color: white;
+    }
+
+    .guide-card-title {
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: var(--text-dark);
+    }
+
+    .guide-card-desc {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .guide-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.86rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .guide-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffadd2, #ff85b3);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .guide-step a {
+      color: var(--pink-600);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(232, 82, 138, 0.3);
+    }
+
+    .guide-step a:hover {
+      border-bottom-style: solid;
+    }
+
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 12px;
+      padding: 9px 20px;
+      background: linear-gradient(135deg, #ff6b9d, #e8528a);
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 12px rgba(255, 107, 157, 0.25);
+    }
+
+    .guide-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.35);
+    }
+
+    /* Footer */
+    .guide-footer {
+      width: 100%;
+      font-size: 0.86rem;
+      color: var(--text-mid);
+      background: linear-gradient(135deg, #fff5f8, #fff0f5);
+      border: 1px solid rgba(255, 173, 210, 0.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .guide-footer strong {
+      color: var(--pink-600);
+    }
+
+    .section-sub-label {
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--pink-300);
+      border-radius: 3px;
+    }
+
+    /* ══ Order History Dialog ══ */
+    .order-dialog-box {
+      max-width: 640px;
+      width: 100%;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow:
+        0 0 0 1px rgba(255, 107, 157, 0.15),
+        0 24px 60px rgba(255, 107, 157, 0.18),
+        0 10px 30px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .order-dialog-header {
+      padding: 24px 28px 18px;
+      border-bottom: 1px solid rgba(255, 173, 210, 0.25);
+      background: linear-gradient(180deg, #fffafc 0%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .order-header-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ff6b9d, #e8528a);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(255, 107, 157, 0.32);
+      animation: emojiFloat 3s ease-in-out infinite;
+    }
+
+    .order-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 2px;
+    }
+
+    .order-count-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: #fff0f5;
+      color: var(--pink-600);
+      border: 1px solid rgba(255, 107, 157, 0.25);
+    }
+
+    .order-dialog-body {
+      padding: 24px 28px 28px;
+      max-height: 65vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* Empty State */
+    .order-empty-state {
+      padding: 42px 16px 36px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: dlgFadeIn 0.35s ease;
+    }
+
+    .order-empty-icon-wrap {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .order-empty-icon-glow {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 173, 210, 0.5) 0%, rgba(255, 214, 231, 0) 70%);
+      animation: emptyPulse 2.8s ease-in-out infinite;
+    }
+
+    .order-empty-icon {
+      position: relative;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff0f5, #ffe4ef);
+      border: 2px dashed rgba(255, 107, 157, 0.45);
+      color: var(--pink-500);
+      font-size: 2.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(255, 107, 157, 0.18);
+      animation: emptyFloat 3s ease-in-out infinite;
+    }
+
+    .empty-sparkle {
+      position: absolute;
+      font-size: 1.15rem;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .sp1 {
+      top: -2px;
+      right: -4px;
+      animation: sparkleFloat 2.6s ease-in-out infinite;
+    }
+
+    .sp2 {
+      bottom: 2px;
+      left: -2px;
+      animation: sparkleFloat 3.2s ease-in-out 0.8s infinite;
+    }
+
+    .sp3 {
+      top: 38%;
+      left: -14px;
+      font-size: 0.95rem;
+      animation: sparkleFloat 2.9s ease-in-out 1.4s infinite;
+    }
+
+    @keyframes emptyFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-7px) scale(1.03);
+      }
+    }
+
+    @keyframes emptyPulse {
+
+      0%,
+      100% {
+        transform: scale(0.95);
+        opacity: 0.4;
+      }
+
+      50% {
+        transform: scale(1.15);
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes sparkleFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg) scale(0.9);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translateY(-5px) rotate(15deg) scale(1.15);
+        opacity: 1;
+      }
+    }
+
+    .order-empty-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0;
+    }
+
+    .order-empty-desc {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      max-width: 390px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .order-empty-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 26px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #ff6b9d, #e8528a);
+      color: white;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(255, 107, 157, 0.38);
+      transition: all 0.25s ease;
+    }
+
+    .order-empty-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 24px rgba(255, 107, 157, 0.48);
+      filter: brightness(1.05);
+    }
+
+    .order-empty-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Order List (Populated State) */
+    .order-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: dlgFadeIn 0.3s ease;
+    }
+
+    /* ── Order Card ── */
+    .order-card {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid rgba(255, 173, 210, 0.35);
+      border-radius: 16px;
+      padding: 18px 20px;
+      transition: all 0.25s ease;
+      overflow: hidden;
+    }
+
+    .order-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #ff6b9d, #e8528a);
+      opacity: 0.7;
+    }
+
+    .order-card.is-pending::before {
+      background: linear-gradient(180deg, #f59e0b, #ef4444);
+    }
+
+    .order-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 107, 157, 0.5);
+      box-shadow: 0 8px 24px rgba(255, 107, 157, 0.12);
+    }
+
+    /* Glow effect */
+    .order-card-glow {
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 157, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .order-card.is-pending .order-card-glow {
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+    }
+
+    /* ── Header: Mã đơn + Badge trạng thái ── */
+    .order-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .order-card-code {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .order-card-code-label {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    .order-card-code-value {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      letter-spacing: 0.3px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    .order-card-copy-code {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 0.82rem;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .order-card-copy-code:hover {
+      background: #fff0f5;
+      color: var(--pink-600);
+    }
+
+    /* Badge trạng thái */
+    .order-card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .order-card-status.is-paid {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+    }
+
+    .order-card-status.is-pending {
+      background: #fffbeb;
+      color: #d97706;
+      border: 1px solid #fde68a;
+    }
+
+    .order-card-status i {
+      font-size: 0.7rem;
+    }
+
+    /* ── Grid thông tin: Ngày tạo + Tổng tiền ── */
+    .order-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px dashed rgba(255, 173, 210, 0.3);
+      border-bottom: 1px dashed rgba(255, 173, 210, 0.3);
+      margin-bottom: 14px;
+    }
+
+    .order-card-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .order-card-field-label {
+      font-size: 0.76rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .order-card-field-label i {
+      color: var(--pink-500);
+      font-size: 0.8rem;
+    }
+
+    .order-card-field-value {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .order-card-price {
+      font-weight: 700;
+      font-size: 1.02rem;
+      background: linear-gradient(135deg, #e8528a, #ff6b9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Action Buttons ── */
+    .order-card-actions {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .order-card-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+      font-family: inherit;
+      line-height: 1.3;
+      white-space: nowrap;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .order-card-btn i {
+      font-size: 0.86rem;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .order-card-btn:hover:not(:disabled) i {
+      transform: scale(1.15);
+    }
+
+    .order-card-btn:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+
+    .order-card-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Xem quà (Primary Action) */
+    .order-card-btn-view {
+      background: linear-gradient(135deg, #ff4f8e 0%, #ff7da7 100%);
+      color: #ffffff;
+      box-shadow: 0 3px 12px rgba(255, 79, 142, 0.32);
+    }
+
+    .order-card-btn-view:hover:not(:disabled) {
+      background: linear-gradient(135deg, #ff387f 0%, #ff6897 100%);
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 16px rgba(255, 79, 142, 0.42);
+    }
+
+    /* Copy link (Soft Pink Accent) */
+    .order-card-btn-copy {
+      background: #fff2f6;
+      color: #d63384;
+      border-color: rgba(255, 107, 157, 0.38);
+      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.08);
+    }
+
+    .order-card-btn-copy:hover:not(:disabled) {
+      background: #ffe3ee;
+      border-color: rgba(255, 107, 157, 0.65);
+      color: #b81768;
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px rgba(255, 107, 157, 0.18);
+    }
+
+    /* Tạo QR (Tech Indigo/Violet Gradient) */
+    .order-card-btn-qr {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: #ffffff;
+      box-shadow: 0 3px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .order-card-btn-qr:hover:not(:disabled) {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 16px rgba(99, 102, 241, 0.42);
+    }
+
+    /* Thanh toán ngay (Full width) */
+    .order-card-btn-pay {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: white;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.32);
+      font-size: 0.88rem;
+      padding: 10px 18px;
+      border-radius: 12px;
+      animation: payPulse 2s ease-in-out infinite;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .order-card-btn-pay:hover:not(:disabled) {
+      filter: brightness(1.06);
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.42);
+    }
+
+    .order-card-btn-pay:disabled {
+      animation: none;
+    }
+
+    @keyframes payPulse {
+      0%, 100% {
+        box-shadow: 0 3px 12px rgba(245, 158, 11, 0.32);
+      }
+      50% {
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+      }
+    }
+
+    .order-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(45, 20, 35, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: white;
+      font-size: 0.85rem;
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(.34, 1.56, .64, 1);
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .order-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ══ PAY SUCCESS DIALOG (Sau khi thanh toán thành công) ══ */
+    .pay-success-box {
+      max-width: 580px;
+      width: 100%;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow:
+        0 0 0 1px rgba(16, 185, 129, 0.25),
+        0 24px 60px rgba(16, 185, 129, 0.18),
+        0 10px 30px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: dialogPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pay-success-header {
+      padding: 22px 26px 18px;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.18);
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .pay-success-icon-wrap {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      animation: successPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes successPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      }
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      }
+    }
+
+    .pay-success-header-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pay-success-kicker {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #059669;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .pay-success-title {
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .pay-success-body {
+      padding: 20px 24px 26px;
+      overflow-y: auto;
+      max-height: calc(90vh - 120px);
+    }
+
+    .pay-success-intro {
+      font-size: 0.92rem;
+      color: var(--text-medium, #4b5563);
+      line-height: 1.55;
+      margin-bottom: 16px;
+      background: #fdf2f8;
+      border: 1px dashed rgba(255, 107, 157, 0.35);
+      padding: 12px 16px;
+      border-radius: 14px;
+    }
+
+    .pay-success-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pay-success-list .order-card {
+      border: 1.5px solid rgba(16, 185, 129, 0.4);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
+    }
+
+    /* ══ VALIDATION REQUIRED DIALOG ══ */
+    .validation-dialog-box {
+      max-width: 500px;
+      padding: 0;
+      border: 1.5px solid rgba(255, 107, 157, 0.35);
+      background: linear-gradient(180deg, #fffafc 0%, #ffffff 100%);
+      border-radius: 24px;
+      box-shadow: 0 0 0 1px rgba(255, 107, 157, 0.15), 0 30px 90px rgba(232, 62, 140, 0.22), 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .validation-dialog-header {
+      padding: 24px 24px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255, 180, 205, 0.25);
+    }
+
+    .validation-header-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #ff6b9d, #e83e8c);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 8px 20px rgba(232, 62, 140, 0.32);
+      flex-shrink: 0;
+      animation: pulseWarn 2s infinite;
+    }
+
+    @keyframes pulseWarn {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 10px 24px rgba(232, 62, 140, 0.45);
+      }
+    }
+
+    .validation-dialog-header .dialog-title {
+      color: #3b1828;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .validation-dialog-header .dialog-subtitle {
+      font-size: 0.88rem;
+      color: #7a5a6b;
+      line-height: 1.45;
+    }
+
+    .validation-dialog-body {
+      padding: 16px 24px;
+    }
+
+    .validation-missing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .validation-missing-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      background: rgba(255, 240, 246, 0.72);
+      border: 1px solid rgba(255, 107, 157, 0.28);
+      border-radius: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .validation-missing-item:hover {
+      background: rgba(255, 235, 243, 0.95);
+      border-color: rgba(255, 107, 157, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .validation-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .validation-item-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(255, 77, 136, 0.12);
+      color: #e83e8c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .validation-item-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .validation-item-name {
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: #2b1724;
+    }
+
+    .validation-item-desc {
+      font-size: 0.8rem;
+      color: #8a6275;
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    .btn-item-jump {
+      padding: 7px 14px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: #fff;
+      border: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 10px rgba(255, 117, 140, 0.28);
+    }
+
+    .btn-item-jump:hover {
+      transform: scale(1.04);
+      box-shadow: 0 5px 14px rgba(255, 117, 140, 0.45);
+    }
+
+    .validation-hint-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: #8c536c;
+      background: rgba(255, 245, 248, 0.85);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border-left: 3.5px solid #ff758c;
+      margin-top: 4px;
+    }
+
+    .validation-dialog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid rgba(255, 180, 205, 0.25);
+    }
+
+    .btn-validation-fix {
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff6b9d, #e83e8c);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(232, 62, 140, 0.32);
+      transition: all 0.2s;
+    }
+
+    .btn-validation-fix:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(232, 62, 140, 0.45);
+    }
+
+    .btn-validation-cancel {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.05);
+      color: #666;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+
+    .btn-validation-cancel:hover {
+      background: rgba(0, 0, 0, 0.09);
+      color: #222;
+    }
+
+    @keyframes fieldHighlightPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 157, 0.75);
+      }
+
+      50% {
+        box-shadow: 0 0 0 12px rgba(255, 107, 157, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 157, 0);
+      }
+    }
+
+    .field-highlight-pulse {
+      animation: fieldHighlightPulse 1.2s ease 2;
+      border-color: #ff6b9d !important;
+    }
+
+    /* ══ RESPONSIVE SYSTEM (Desktop, iPad, Tablet, Mobile) ══ */
+
+    /* ── Tablet & iPad Landscape (max-width: 992px) ── */
+    @media (max-width: 992px) {
+      .page-wrapper {
+        padding: 0 18px 70px;
+      }
+
+      .hero {
+        padding: 44px 16px 32px;
+      }
+
+      .card {
+        padding: 24px 22px;
+        border-radius: 18px;
+        margin-bottom: 20px;
+      }
+
+      .user-bar {
+        padding: 12px 18px;
+        margin-bottom: 24px;
+      }
+
+      .user-email {
+        max-width: 200px;
+      }
+
+      .payment-detail {
+        margin-bottom: 24px;
+      }
+
+      .detail-row {
+        padding: 14px 20px;
+      }
+
+      .detail-total {
+        padding: 18px 20px;
+      }
+
+      .dialog-box {
+        max-width: 92vw;
+      }
+    }
+
+    /* ── iPad Portrait & Small Tablets (max-width: 768px) ── */
+    @media (max-width: 768px) {
+      .page-wrapper {
+        padding: 0 14px 60px;
+      }
+
+      .hero {
+        padding: 38px 12px 26px;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 6.5vw, 2.6rem);
+        line-height: 1.4;
+        padding-bottom: 12px;
+      }
+
+      .hero-slogan {
+        font-size: 1.1rem;
+        margin-bottom: 22px;
+      }
+
+      .btn-preview {
+        padding: 12px 28px;
+        font-size: 0.98rem;
+      }
+
+      .user-bar {
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        gap: 10px;
+      }
+
+      .user-email {
+        max-width: 170px;
+        font-size: 0.92rem;
+      }
+
+      .btn-user {
+        padding: 8px 13px;
+        font-size: 0.82rem;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 18px;
+        margin-bottom: 18px;
+      }
+
+      .card-title {
+        font-size: 1.2rem;
+      }
+
+      .card-hint {
+        font-size: 0.84rem;
+        padding: 9px 12px;
+        margin-bottom: 15px;
+      }
+
+      .input-row {
+        gap: 7px;
+      }
+
+      .input-field {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+      }
+
+      .btn-add {
+        padding: 11px 20px;
+        font-size: 0.92rem;
+      }
+
+      .music-controls {
+        gap: 8px;
+      }
+
+      .btn-music-file,
+      .btn-guide {
+        font-size: 0.84rem;
+        padding: 10px 14px;
+      }
+
+      .payment-method-group {
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .radio-option {
+        padding: 18px 12px 14px;
+      }
+
+      .checkbox-forever {
+        padding: 15px 16px;
+        margin-bottom: 22px;
+      }
+
+      .payment-detail {
+        border-radius: 16px;
+        margin-bottom: 22px;
+      }
+
+      .detail-row {
+        padding: 13px 18px;
+        font-size: 0.88rem;
+      }
+
+      .detail-total {
+        padding: 16px 18px;
+      }
+
+      .total-label {
+        font-size: 1rem;
+      }
+
+      .total-price {
+        font-size: 1.45rem;
+      }
+
+      .action-buttons {
+        gap: 10px;
+      }
+
+      .btn-secondary,
+      .btn-pay {
+        padding: 15px 20px;
+        font-size: 0.98rem;
+      }
+
+      .guide-card {
+        min-width: 100%;
+      }
+
+      .dialog-body {
+        gap: 12px;
+        padding: 18px 16px;
+      }
+    }
+
+    /* ── Mobile Phones (max-width: 540px) ── */
+    @media (max-width: 540px) {
+      .page-wrapper {
+        padding: 0 12px 48px;
+      }
+
+      .hero {
+        padding: 32px 8px 22px;
+      }
+
+      .hero-badge {
+        font-size: 0.8rem;
+        padding: 5px 14px;
+        margin-bottom: 12px;
+      }
+
+      .hero-title {
+        font-size: 2.05rem;
+        line-height: 1.35;
+        padding-bottom: 10px;
+      }
+
+      .hero-slogan {
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      .btn-preview {
+        padding: 12px 24px;
+        font-size: 0.92rem;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .login-card {
+        padding: 32px 18px 28px;
+        border-radius: 24px;
+      }
+
+      .login-title {
+        font-size: 1.95rem;
+        margin-bottom: 12px;
+      }
+
+      .login-slogan {
+        font-size: 0.9rem;
+        margin-bottom: 26px;
+      }
+
+      .btn-google-login {
+        max-width: 100%;
+        padding: 12px 20px;
+        gap: 12px;
+      }
+
+      .btn-google-text {
+        font-size: 0.98rem;
+      }
+
+      .btn-google-icon-box {
+        width: 28px;
+        height: 28px;
+      }
+
+      .user-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        margin-bottom: 18px;
+      }
+
+      .user-info {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .user-email {
+        max-width: 220px;
+        font-size: 0.9rem;
+      }
+
+      .user-actions {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-user {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      .card {
+        padding: 18px 14px;
+        border-radius: 16px;
+        margin-bottom: 16px;
+      }
+
+      .card-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+      }
+
+      .card-title {
+        font-size: 1.15rem;
+      }
+
+      .card-hint {
+        font-size: 0.82rem;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+      }
+
+      .input-row {
+        gap: 6px;
+      }
+
+      .input-index {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+      }
+
+      .input-field {
+        padding: 11px 13px;
+        font-size: 0.92rem;
+      }
+
+      .btn-delete {
+        width: 32px;
+        height: 32px;
+        font-size: 0.78rem;
+      }
+
+      .btn-add {
+        padding: 11px 18px;
+        font-size: 0.9rem;
+      }
+
+      .music-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .custom-dropdown {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .btn-music-file {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 14px;
+      }
+
+      .btn-guide {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 14px;
+      }
+
+      .audio-player {
+        padding: 14px 16px;
+      }
+
+      .player-song-name {
+        font-size: 0.9rem;
+      }
+
+      .player-bottom {
+        margin-top: 8px;
+        gap: 8px;
+      }
+
+      .upload-zone {
+        padding: 22px 14px;
+        border-radius: 14px;
+      }
+
+      .upload-title {
+        font-size: 0.98rem;
+      }
+
+      .upload-desc {
+        font-size: 0.82rem;
+      }
+
+      .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+        gap: 8px;
+      }
+
+      .payment-method-group {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .radio-option {
+        padding: 14px 14px;
+        flex-direction: row;
+        text-align: left;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .radio-option-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.15rem;
+        border-radius: 12px;
+        flex-shrink: 0;
+      }
+
+      .radio-body {
+        text-align: left;
+      }
+
+      .radio-title {
+        font-size: 0.92rem;
+        margin-bottom: 3px;
+      }
+
+      .radio-tags {
+        justify-content: flex-start;
+        margin-bottom: 3px;
+      }
+
+      .radio-desc {
+        font-size: 0.74rem;
+      }
+
+      .checkbox-forever {
+        padding: 14px 14px;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .forever-title {
+        font-size: 0.94rem;
+      }
+
+      .forever-desc {
+        font-size: 0.8rem;
+      }
+
+      .payment-detail {
+        border-radius: 14px;
+        margin-bottom: 20px;
+      }
+
+      .detail-row {
+        padding: 12px 14px;
+        font-size: 0.85rem;
+      }
+
+      .detail-row:first-child {
+        padding-top: 16px;
+      }
+
+      .detail-row .label {
+        gap: 8px;
+        font-size: 0.84rem;
+      }
+
+      .detail-row .label i {
+        width: 26px;
+        height: 26px;
+        font-size: 0.72rem;
+      }
+
+      .detail-row .price {
+        font-size: 0.88rem;
+      }
+
+      .detail-total {
+        padding: 15px 14px;
+      }
+
+      .total-label {
+        font-size: 0.98rem;
+      }
+
+      .total-price {
+        font-size: 1.35rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .btn-secondary,
+      .btn-pay {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 0.98rem;
+        border-radius: 14px;
+      }
+
+      .payment-note {
+        padding: 12px 14px;
+        font-size: 0.82rem;
+        margin-top: 16px;
+      }
+
+      .contact-footer {
+        padding: 16px 14px;
+        margin-top: 16px;
+      }
+
+      .contact-title {
+        font-size: 0.9rem;
+      }
+
+      .contact-icons {
+        gap: 18px;
+      }
+
+      .contact-icons img {
+        width: 46px;
+        height: 46px;
+      }
+
+      .contact-follow {
+        font-size: 0.82rem;
+      }
+
+      /* Dialogs on mobile */
+      .dialog-overlay {
+        padding: 10px;
+      }
+
+      .dialog-box {
+        border-radius: 18px;
+        max-height: 92vh;
+        width: 100%;
+      }
+
+      .dialog-close-icon {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+      }
+
+      .dialog-header {
+        padding: 20px 16px 14px;
+        gap: 10px;
+      }
+
+      .dialog-header-emoji {
+        font-size: 1.8rem;
+      }
+
+      .dialog-title {
+        font-size: 1.2rem;
+      }
+
+      .dialog-title-sub {
+        font-size: 0.95rem;
+      }
+
+      .dialog-subtitle {
+        font-size: 0.78rem;
+      }
+
+      .dialog-body {
+        padding: 16px 14px 18px;
+        gap: 12px;
+      }
+
+      .guide-card {
+        min-width: 100%;
+        padding: 16px 14px;
+        border-radius: 12px;
+      }
+
+      .guide-footer {
+        padding: 12px 14px;
+        font-size: 0.8rem;
+      }
+
+      .order-dialog-header {
+        padding: 18px 16px 14px;
+        gap: 12px;
+      }
+
+      .order-header-icon-wrap {
+        width: 40px;
+        height: 40px;
+        font-size: 1.15rem;
+        border-radius: 12px;
+      }
+
+      .order-dialog-body {
+        padding: 16px 14px 22px;
+      }
+
+      .order-empty-state {
+        padding: 32px 12px 24px;
+      }
+
+      .order-empty-icon {
+        width: 72px;
+        height: 72px;
+        font-size: 1.8rem;
+      }
+
+      .order-empty-title {
+        font-size: 1.18rem;
+      }
+
+      .order-card {
+        padding: 14px 14px;
+        border-radius: 14px;
+      }
+
+      .order-card-code-value {
+        font-size: 0.88rem;
+      }
+
+      .order-card-status {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+      }
+
+      .order-card-grid {
+        gap: 8px;
+        padding: 10px 0;
+      }
+
+      .order-card-field-value {
+        font-size: 0.82rem;
+      }
+
+      .order-card-price {
+        font-size: 0.95rem;
+      }
+
+      .order-card-actions {
+        gap: 6px;
+        width: 100%;
+      }
+
+      .order-card-btn {
+        flex: 1 1 0;
+        min-width: 0;
+        justify-content: center;
+        padding: 9px 5px;
+        font-size: 0.78rem;
+        gap: 5px;
+        border-radius: 10px;
+        min-height: 38px;
+      }
+
+      .order-card-btn i {
+        font-size: 0.82rem;
+      }
+
+      .pay-success-header {
+        padding: 16px 16px 14px;
+        gap: 12px;
+      }
+
+      .pay-success-icon-wrap {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+        border-radius: 12px;
+      }
+
+      .pay-success-title {
+        font-size: 1.12rem;
+      }
+
+      .pay-success-body {
+        padding: 16px 14px 20px;
+      }
+
+      .pay-success-intro {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+      }
+    }
+
+    /* ── Extra Small Devices (max-width: 380px) ── */
+    @media (max-width: 380px) {
+      .page-wrapper {
+        padding: 0 8px 36px;
+      }
+
+      .hero {
+        padding: 24px 6px 16px;
+      }
+
+      .hero-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+      }
+
+      .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.3;
+      }
+
+      .hero-slogan {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+      }
+
+      .btn-preview {
+        font-size: 0.88rem;
+        padding: 11px 18px;
+      }
+
+      .user-bar {
+        padding: 10px 12px;
+        gap: 10px;
+      }
+
+      .user-email {
+        max-width: 150px;
+        font-size: 0.82rem;
+      }
+
+      .btn-user {
+        padding: 7px 8px;
+        font-size: 0.75rem;
+        gap: 4px;
+      }
+
+      .card {
+        padding: 15px 10px;
+        border-radius: 14px;
+      }
+
+      .card-title {
+        font-size: 1.05rem;
+      }
+
+      .input-row {
+        gap: 5px;
+      }
+
+      .input-index {
+        width: 25px;
+        height: 25px;
+        font-size: 0.75rem;
+      }
+
+      .input-field {
+        padding: 9px 10px;
+        font-size: 0.88rem;
+      }
+
+      .btn-delete {
+        width: 28px;
+        height: 28px;
+        font-size: 0.72rem;
+      }
+
+      .btn-add {
+        padding: 9px 14px;
+        font-size: 0.84rem;
+      }
+
+      .audio-player {
+        padding: 12px 12px;
+      }
+
+      .player-song-name {
+        font-size: 0.85rem;
+      }
+
+      .player-time {
+        font-size: 0.72rem;
+      }
+
+      .detail-row {
+        padding: 10px 10px;
+        font-size: 0.8rem;
+      }
+
+      .detail-row .label {
+        font-size: 0.78rem;
+      }
+
+      .detail-row .price {
+        font-size: 0.82rem;
+      }
+
+      .detail-total {
+        padding: 12px 10px;
+      }
+
+      .total-label {
+        font-size: 0.9rem;
+      }
+
+      .total-price {
+        font-size: 1.2rem;
+      }
+
+      .btn-secondary,
+      .btn-pay {
+        padding: 12px 16px;
+        font-size: 0.92rem;
+      }
+
+      .order-dialog-header {
+        padding: 14px 12px 10px;
+      }
+
+      .order-empty-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 1.6rem;
+      }
+
+      .order-empty-title {
+        font-size: 1.08rem;
+      }
+
+      .order-card-actions {
+        gap: 5px;
+        width: 100%;
+      }
+
+      .order-card-btn {
+        padding: 8px 3px;
+        font-size: 0.72rem;
+        gap: 3px;
+        letter-spacing: -0.2px;
+        border-radius: 8px;
+        min-height: 36px;
+      }
+
+      .order-card-btn i {
+        font-size: 0.74rem;
+      }
+    }
+  </style>
+
+  <!-- Chặn DevTools -->
+  <script src="js/detect-devtools.js"></script>
+  <script type="text/javascript">
+    // Bypass for developers
+    const keyName = 'key';
+    const keyValue = '9ac7ec230e0e4513578f309d6d3579ad';
+
+    // Handle via config
+    DisableDevtool({
+      tkName: keyName,
+      md5: keyValue,
+      interval: '100',
+    });
+  </script>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <!-- App Config & Auth -->
+  <script src="lib/app-config.js"></script>
+  <script src="lib/auth.js"></script>
+  <script src="lib/firebase-helper.js"></script>
+  <script src="lib/falling-love-api.js"></script>
+  <!-- Socket.io Realtime Payment Tracking -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script type="module" src="lib/config.js"></script>
+  <script type="module" src="lib/product.js"></script>
+  <script type="module" src="lib/payment.js"></script>
+  <script src="js/order-history.js"></script>
+  <script src="lib/payment-flow.js"></script>
+</head>
+
+<body>
+
+  <div class="floating-hearts" id="floatingHearts"></div>
+
+  <div class="page-wrapper">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-badge">
+        <i class="fa-solid fa-heart"></i>
+        Falling Love Gift
+      </div>
+      <h1 class="hero-title">Falling Love 💕</h1>
+      <p class="hero-slogan">✨ Tạo quà xinh – Gửi trọn yêu thương ✨</p>
+      <a href="index.html?sample=1" target="_blank" rel="noopener noreferrer" class="btn-preview" id="btn-view-sample">
+        <i class="fa-solid fa-eye"></i>
+        Xem mẫu đầy đủ
+      </a>
+    </header>
+
+    <!-- GOOGLE LOGIN BOX (Hiển thị khi chưa đăng nhập) -->
+    <div class="google-login-wrapper" id="googleLoginBox">
+      <div class="login-card">
+        <h2 class="login-title">Đăng Nhập</h2>
+        <p class="login-slogan">Đăng nhập để tạo món quà ý nghĩa của riêng bạn</p>
+
+        <button type="button" class="btn-google-login google-login-btn" id="btnGoogleLogin" onclick="loginWithGoogle()">
+          <span class="btn-google-icon-box google-icon-wrapper" aria-hidden="true">
+            <svg viewBox="0 0 48 48" class="google-svg" width="22" height="22">
+              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+              <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+              <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.96 11.96 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+            </svg>
+          </span>
+          <span class="btn-google-text" id="btnGoogleText">Đăng nhập với Google</span>
+        </button>
+
+        <!-- Thông báo lỗi (mặc định ẩn) -->
+        <p class="login-error-msg" id="loginError" hidden></p>
+      </div>
+    </div>
+
+    <!-- CREATION WRAPPER (Chỉ mở ra sau khi đăng nhập Google thành công) -->
+    <div class="creation-wrapper" id="creationWrapper" style="display:none;">
+
+      <!-- USER BAR -->
+      <div class="user-bar" id="userBar">
+        <div class="user-info">
+          <div class="user-avatar" id="userAvatarWrap">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="user-details">
+            <div class="user-name" id="userName">Người dùng</div>
+            <div class="user-email" id="userEmail">example@gmail.com</div>
+          </div>
+        </div>
+        <div class="user-actions">
+          <button class="btn-user btn-history" id="btn-order-history" onclick="openOrderHistory()">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Lịch sử đơn hàng
+          </button>
+          <button class="btn-user btn-logout" id="btn-logout" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Đăng xuất
+          </button>
+        </div>
+      </div>
+
+      <!-- SECTION 1: INTRO -->
+      <section class="card" id="section-intro">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fa-solid fa-pen-nib"></i>
+          </div>
+          <div>
+            <div class="card-title-row">
+              <div class="card-title">Nội dung Intro</div>
+              <span class="badge-field-status required"><i class="fa-solid fa-asterisk"></i> Bắt buộc</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-divider">✦</div>
+        <div class="card-hint">
+          💡 Nhập các câu ngắn gọn, xúc tích để hiển thị đẹp ở phần intro.
+          <strong>Bắt buộc nhập tối thiểu 1 câu</strong>, tối đa <strong>15 câu</strong> (Miễn phí 3 câu đầu, từ câu thứ
+          4: + 3.000đ/câu).
+          <div style="margin-top: 6px; color: #e83e8c; font-weight: 500;">
+            ⚠️ <strong>Lưu ý:</strong> Mỗi ô câu intro <strong>không được vượt quá 60 ký tự</strong> để hiển thị đẹp mắt, tránh bị tràn màn hình.
+          </div>
+        </div>
+        <div class="input-list" id="introInputList"></div>
+        <button class="btn-add" id="btn-add-intro" onclick="addIntroInput()">
+          <i class="fa-solid fa-plus"></i>
+          Thêm ô nhập intro
+          <span class="count-badge" id="intro-count">1</span>
+        </button>
+
+        <!-- Nhạc nền -->
+        <div class="music-section">
+          <div class="music-label-row">
+            <div class="music-label">Nhạc nền quà tặng</div>
+            <span class="badge-field-status required"><i class="fa-solid fa-asterisk"></i> Bắt buộc</span>
+          </div>
+          <div class="music-sublabel">Phát xuyên suốt đến cuối · Chọn từ danh sách có sẵn hoặc tải lên file MP3 của bạn
+          </div>
+
+          <div class="music-controls">
+            <div class="custom-dropdown" id="musicDropdown">
+              <div class="dropdown-toggle" id="dropdownToggle" onclick="toggleMusicDropdown()">
+                <div class="dropdown-toggle-left">
+                  <i class="fa-solid fa-music"></i>
+                  <span class="dropdown-toggle-text placeholder" id="dropdownText">Chọn nhạc mẫu...</span>
+                </div>
+                <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+              </div>
+              <div class="dropdown-list" id="dropdownList">
+                <div class="dropdown-item" data-value="assets/music/loveMusic/1000anhmat.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">1000 Ánh Mắt</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/Hngle - Tìm em ft (mp3cut.net).mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Hngle - Tìm Em</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/anhnangcuaanh.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Ánh Nắng Của Anh</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/athousandyears.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">A Thousand Years</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/cochacyeuladay.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Có Chắc Yêu Là Đây</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/codoidieu.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Có Đôi Điều</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/danhchoem.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Dành Cho Em</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/denbenanh.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Đến Bên Anh</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/givemeyourforever.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Give Me Your Forever</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/le_duong.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Lệ Đường</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/motdoi.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Một Đời</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/nhaccuoi_atus.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Nhạc Cưới (Atus)</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/noinaycoanh.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Nơi Này Có Anh</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/perfect.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Perfect</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/phepmau.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Phép Màu</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/thuongemdengia.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Thương Em Đến Già</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/votuyetvoinhat.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Vô Tư Yêu Với Nhất</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/yeuemhonmoingay.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Yêu Em Hơn Mỗi Ngày</span>
+                </div>
+                <div class="dropdown-item" data-value="assets/music/loveMusic/yeuemratnhieu.mp3"
+                  onclick="selectMusicItem(this)">
+                  <div class="dropdown-item-icon"><i class="fa-solid fa-music"></i></div>
+                  <span class="dropdown-item-name">Yêu Em Rất Nhiều</span>
+                </div>
+              </div>
+            </div>
+
+            <label class="btn-music-file">
+              <i class="fa-solid fa-folder-open"></i>
+              Chọn file nhạc
+              <input type="file" id="musicFileInput" accept=".mp3" onchange="onMusicFileChange(event)">
+            </label>
+
+            <button class="btn-guide" onclick="openGuideDialog()">
+              <i class="fa-solid fa-circle-question"></i>
+              Hướng dẫn
+            </button>
+          </div>
+
+          <!-- Audio Player -->
+          <div class="audio-player" id="audioPlayer">
+            <div class="player-top">
+              <div class="player-song-name" id="playerSongName">
+                <i class="fa-solid fa-music"></i>
+                <span id="playerSongText">Chưa chọn bài</span>
+              </div>
+            </div>
+            <div class="player-progress-wrap" id="progressWrap" onclick="seekAudio(event)">
+              <div class="player-progress" id="playerProgress"></div>
+            </div>
+            <div class="player-bottom">
+              <button class="player-btn" id="playerBtn" onclick="togglePlay()">
+                <i class="fa-solid fa-play" id="playerIcon"></i>
+              </button>
+              <div class="player-time">
+                <span id="playerCurrentTime">0:00</span> / <span id="playerDuration">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- SECTION 2: LỜI CHÚC & HÌNH ẢNH -->
+      <section class="card" id="section-wishes">
+        <div class="card-header">
+          <div class="card-icon" style="background: linear-gradient(135deg, #ff85b3, #c73b72);">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <div>
+            <div class="card-title-row">
+              <div class="card-title">Lời chúc yêu thương & Hình ảnh</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-divider">💕</div>
+
+        <!-- Phân mục 1: Ảnh kỷ niệm (Không bắt buộc) -->
+        <div class="field-subgroup">
+          <div class="subgroup-header">
+            <div class="subgroup-title">
+              <i class="fa-solid fa-images" style="color:#ff6b9d;"></i>
+              Ảnh kỷ niệm
+            </div>
+            <span class="badge-field-status optional"><i class="fa-solid fa-circle-info"></i> Tùy chọn · Không bắt
+              buộc</span>
+          </div>
+          <div class="card-hint">
+            🖼️ <em>Không bắt buộc</em> — nếu bạn không chọn ảnh thì quà vẫn hiển thị trọn vẹn hiệu ứng sao băng và câu
+            chúc 3D.
+            Tối đa <strong>15 ảnh</strong>, mỗi ảnh không quá <strong>10MB</strong>. Định dạng hỗ trợ: JPG, PNG, WEBP,
+            GIF (Miễn phí 2 ảnh đầu, từ ảnh thứ 3: + 3.000đ/ảnh).
+          </div>
+
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="imageInput" accept="image/*" multiple onchange="handleImageSelect(event)">
+            <div class="upload-icon">
+              <i class="fa-solid fa-images"></i>
+            </div>
+            <div class="upload-title">Chọn ảnh từ thiết bị</div>
+            <div class="upload-desc">Nhấn để chọn hoặc kéo thả ảnh vào đây (Có thể bỏ qua nếu không dùng ảnh)</div>
+            <span class="upload-limit">
+              <i class="fa-solid fa-shield-heart"></i>
+              Tối đa 15 ảnh · 10MB/ảnh
+            </span>
+          </div>
+
+          <div id="imagePreviewGrid" class="image-grid" style="display:none;"></div>
+          <div id="imageCountInfo" class="image-count-info" style="display:none;">
+            Đã chọn: <span id="imageCountNum">0</span>/15 ảnh
+          </div>
+        </div>
+
+        <!-- Phân mục 2: Lời chúc yêu thương (Bắt buộc) -->
+        <div class="field-subgroup"
+          style="margin-top: 24px; padding-top: 20px; border-top: 1.5px dashed rgba(255, 173, 210, 0.45);">
+          <div class="subgroup-header">
+            <div class="subgroup-title">
+              <i class="fa-solid fa-heart" style="color:#ff4d88;"></i>
+              Câu chúc yêu thương (Bay trong không gian 3D)
+            </div>
+            <span class="badge-field-status required"><i class="fa-solid fa-asterisk"></i> Bắt buộc</span>
+          </div>
+          <div class="card-hint">
+            💬 Nhập những lời chúc từ trái tim. <strong>Bắt buộc nhập tối thiểu 1 câu</strong>,
+            tối đa <strong>15 câu</strong>. Viết ngắn gọn để hiển thị chữ bay đẹp mắt hơn (Miễn phí 2 câu đầu, từ câu
+            thứ 3: + 2.000đ/câu).
+          </div>
+
+          <div class="input-list" id="wishInputList"></div>
+
+          <button class="btn-add" id="btn-add-wish" onclick="addWishInput()">
+            <i class="fa-solid fa-plus"></i>
+            Thêm câu chúc
+            <span class="count-badge" id="wish-count">1</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 3: THANH TOÁN -->
+      <section class="card" id="section-payment">
+        <div class="card-header">
+          <div class="card-icon" style="background: linear-gradient(135deg, #ff85b3, #e8528a);">
+            <i class="fa-solid fa-credit-card"></i>
+          </div>
+          <div>
+            <div class="card-title">Thanh toán</div>
+          </div>
+        </div>
+        <div class="section-divider">💳</div>
+
+        <div class="section-sub-label" style="margin-bottom:16px;">
+          Phương thức thanh toán
+        </div>
+
+        <div class="payment-method-group">
+          <div class="radio-option selected" id="opt-domestic">
+            <div class="radio-option-check" id="check-domestic"><i class="fa-solid fa-check"></i></div>
+            <div class="radio-option-icon">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="radio-body">
+              <div class="radio-title">Ngân hàng &amp; Ví nội địa</div>
+              <div class="radio-tags">
+                <span class="radio-tag">MB Bank</span>
+                <span class="radio-tag">TPBank</span>
+                <span class="radio-tag">MoMo</span>
+                <span class="radio-tag">ZaloPay</span>
+                <span class="radio-tag">VNPay</span>
+              </div>
+              <div class="radio-desc">Chuyển khoản nhanh chóng, tức thì</div>
+            </div>
+          </div>
+
+          <div class="radio-option" id="opt-international">
+            <div class="radio-option-check" id="check-international"><i class="fa-solid fa-check"></i></div>
+            <div class="radio-option-icon">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="radio-body">
+              <div class="radio-title">Thanh toán quốc tế</div>
+              <div class="radio-tags">
+                <span class="radio-tag">Visa</span>
+                <span class="radio-tag">Mastercard</span>
+                <span class="radio-tag">PayPal</span>
+                <span class="radio-tag">Apple Pay</span>
+              </div>
+              <div class="radio-desc">Thẻ &amp; ví toàn cầu, bảo mật quốc tế</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider">✦</div>
+
+        <!-- Checkbox lưu vĩnh viễn -->
+        <div class="checkbox-forever" id="foreverBox" onclick="toggleForever()">
+          <div class="checkbox-custom" id="foreverCustom"></div>
+          <div class="forever-body">
+            <div class="forever-title">
+              Lưu giữ món quà vĩnh viễn
+              <span class="forever-price">+19.000 đ</span>
+            </div>
+            <div class="forever-desc">
+              Nếu không chọn, quà tặng sẽ bị vô hiệu hóa sau <strong>1 tháng</strong> kể từ ngày tạo.
+            </div>
+          </div>
+        </div>
+
+        <!-- Chi tiết thanh toán -->
+        <div class="section-sub-label">
+          <i class="fa-solid fa-receipt" style="color:var(--pink-500);"></i>
+          Chi tiết thanh toán
+        </div>
+
+        <div class="payment-detail">
+          <div class="detail-row">
+            <span class="label">Giá gốc (gói cơ bản)</span>
+            <span class="price">49.000 đ</span>
+          </div>
+          <div class="detail-row" id="row-extra-intro">
+            <span class="label"><span id="label-extra-intro">Nội dung intro thêm (3 câu đầu miễn phí)</span></span>
+            <span class="price added" id="price-extra-intro">0 đ</span>
+          </div>
+          <div class="detail-row" id="row-extra-photo">
+            <span class="label"><span id="label-extra-photo">Ảnh thêm (2 ảnh đầu miễn phí)</span></span>
+            <span class="price added" id="price-extra-photo">0 đ</span>
+          </div>
+          <div class="detail-row" id="row-extra-wish">
+            <span class="label"><span id="label-extra-wish">Câu chúc thêm (2 câu đầu miễn phí)</span></span>
+            <span class="price added" id="price-extra-wish">0 đ</span>
+          </div>
+          <div class="detail-row" id="row-forever" style="display:none">
+            <span class="label">Lưu vĩnh viễn</span>
+            <span class="price added">19.000 đ</span>
+          </div>
+          <div class="detail-total">
+            <span class="total-label">Tổng tiền</span>
+            <span class="total-price" id="totalPrice">49.000 đ</span>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-buttons">
+          <button class="btn-secondary" id="btn-preview-gift" onclick="previewGift()">
+            <i class="fa-solid fa-eye"></i>
+            Xem trước
+          </button>
+          <button class="btn-pay" id="btn-pay" onclick="payGift()">
+            <i class="fa-solid fa-credit-card"></i>
+            Thanh toán ngay
+          </button>
+        </div>
+
+        <!-- Lưu ý -->
+        <div class="payment-note">
+          <strong>Lưu ý:</strong> Nếu không nhận được kết quả sau khi đã thanh toán thành công, hãy tự kiểm tra <a
+            href="javascript:void(0)" class="payment-note-link" onclick="openOrderHistory()">Lịch sử đơn hàng</a> ở trên
+          đầu trang tạo.
+        </div>
+
+        <!-- Liên hệ & Follow -->
+        <div class="contact-footer">
+          <div class="contact-title">Liên hệ khi gặp lỗi</div>
+          <div class="contact-icons">
+            <a href="https://zalo.me/0365810365" target="_blank" class="contact-icon-link" title="Zalo">
+              <img src="assets/icons/iconzalo.png" alt="Zalo">
+            </a>
+            <a href="https://www.tiktok.com/@duyheartly" target="_blank" class="contact-icon-link" title="TikTok">
+              <img src="assets/icons/icontiktok.png" alt="TikTok">
+            </a>
+          </div>
+          <div class="contact-follow">Hãy follow TikTok mình để theo dõi và nhận thông báo khi có sản phẩm mới nhất nhé.
+            💕</div>
+        </div>
+      </section>
+
+    </div><!-- /#creationWrapper -->
+
+  </div><!-- /.page-wrapper -->
+
+  <!-- Guide Dialog -->
+  <div class="dialog-overlay" id="guideDialog" onclick="closeGuideDialog(event)">
+    <div class="dialog-box" onclick="event.stopPropagation()">
+      <button class="dialog-close-icon" onclick="closeGuideDialog()" title="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="dialog-header">
+        <span class="dialog-header-emoji">🎵</span>
+        <div class="dialog-header-text">
+          <div class="dialog-title">Hướng dẫn nhanh</div>
+          <div class="dialog-title-sub">Chuyển video/link sang MP3</div>
+          <div class="dialog-subtitle">Chưa có file MP3? Tải về từ YouTube hoặc TikTok rồi chọn lại trong <strong>Chọn
+              file nhạc</strong>.</div>
+        </div>
+      </div>
+
+      <div class="dialog-body">
+        <div class="guide-card">
+          <div class="guide-card-header">
+            <div class="guide-card-icon yt"><i class="fa-brands fa-youtube"></i></div>
+            <div class="guide-card-title">YouTube</div>
+          </div>
+          <div class="guide-card-desc">Đổi link video thành MP3</div>
+          <div class="guide-step"><span class="guide-step-num">1</span> Truy cập <a href="https://www.y2mate.sc/"
+              target="_blank">y2mate.sc</a></div>
+          <div class="guide-step"><span class="guide-step-num">2</span> Dán link YouTube vào ô tìm kiếm</div>
+          <div class="guide-step"><span class="guide-step-num">3</span> Chọn MP3 và tải về</div>
+          <a href="https://www.y2mate.sc/" target="_blank" class="guide-link">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Mở y2mate.sc
+          </a>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-card-header">
+            <div class="guide-card-icon tt"><i class="fa-brands fa-tiktok"></i></div>
+            <div class="guide-card-title">TikTok</div>
+          </div>
+          <div class="guide-card-desc">Tải âm thanh từ video ngắn</div>
+          <div class="guide-step"><span class="guide-step-num">1</span> Truy cập <a href="https://savetik.io/"
+              target="_blank">savetik.io</a></div>
+          <div class="guide-step"><span class="guide-step-num">2</span> Dán link TikTok vào ô tìm kiếm</div>
+          <div class="guide-step"><span class="guide-step-num">3</span> Chọn tải MP3 và tải về</div>
+          <a href="https://savetik.io/" target="_blank" class="guide-link">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Mở savetik.io
+          </a>
+        </div>
+
+        <div class="guide-footer">
+          ✨ Sau khi tải xong file MP3, quay lại và chọn file đó ở <strong>Chọn file nhạc</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order History Dialog -->
+  <div class="dialog-overlay" id="orderHistoryDialog" onclick="closeOrderHistory(event)">
+    <div class="dialog-box order-dialog-box" onclick="event.stopPropagation()">
+      <button class="dialog-close-icon" onclick="closeOrderHistory()" title="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="dialog-header order-dialog-header">
+        <div class="order-header-icon-wrap">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <div class="dialog-header-text">
+          <div class="order-title-row">
+            <div class="dialog-title">Lịch sử đơn hàng</div>
+            <span class="order-count-badge" id="orderCountBadge">0 đơn hàng</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="order-dialog-body" id="orderHistoryContent">
+        <!-- Rendered dynamically by renderOrderHistory() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Validation Required Dialog -->
+  <div class="dialog-overlay" id="validationDialog" onclick="closeValidationDialog(event)">
+    <div class="dialog-box validation-dialog-box" onclick="event.stopPropagation()">
+      <button class="dialog-close-icon" onclick="closeValidationDialog()" title="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="dialog-header validation-dialog-header">
+        <div class="validation-header-icon-wrap">
+          <i class="fa-solid fa-heart-circle-exclamation"></i>
+        </div>
+        <div class="dialog-header-text">
+          <div class="dialog-title">Còn một vài mục cần bổ sung 💕</div>
+          <div class="dialog-subtitle" id="validationActionPrompt">Vui lòng hoàn thành các thông tin bắt buộc dưới đây
+            để tiếp tục:</div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="validation-dialog-body">
+        <div class="validation-missing-list" id="validationMissingList">
+          <!-- Rendered dynamically -->
+        </div>
+        <div class="validation-hint-box">
+          <i class="fa-solid fa-lightbulb" style="color:#ff6b9d; font-size:16px;"></i>
+          <span>Nhấn <strong>"Bổ sung ➔"</strong> ở từng mục để chuyển nhanh đến vị trí cần điền nhé!</span>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="validation-dialog-footer">
+        <button class="btn-validation-cancel" onclick="closeValidationDialog()">
+          Đóng
+        </button>
+        <button class="btn-validation-fix" id="btnValidationFix" onclick="fixFirstMissingItem()">
+          <i class="fa-solid fa-pen-to-square"></i>
+          Điền ngay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Checkout Dialog -->
+  <div class="dialog-overlay payment-checkout-overlay" id="paymentCheckoutDialog" onclick="closePaymentDialog(event)">
+    <div class="payment-checkout-box" onclick="event.stopPropagation()">
+      <button class="payment-dialog-close" onclick="closePaymentDialog()" title="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="payment-checkout-body">
+        <div class="payment-iframe-loading" id="paymentIframeLoading">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          <span>Đang tải cổng thanh toán…</span>
+        </div>
+        <iframe id="paymentIframe" class="payment-iframe" src="about:blank" allow="payment" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Success Dialog (Hiển thị item đơn hàng ngay sau khi thanh toán thành công) -->
+  <div class="dialog-overlay pay-success-overlay" id="paySuccessDialog" onclick="closePaySuccessDialog(event)">
+    <div class="dialog-box pay-success-box" onclick="event.stopPropagation()">
+      <div class="pay-success-header">
+        <div class="pay-success-icon-wrap">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="pay-success-header-info">
+          <span class="pay-success-kicker">Giao dịch hoàn tất</span>
+          <h3 class="pay-success-title">Thanh toán thành công! 🎉</h3>
+        </div>
+        <button class="dialog-close-icon" onclick="closePaySuccessDialog()" title="Đóng" aria-label="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="pay-success-body">
+        <p class="pay-success-intro">
+          Cảm ơn bạn! Món quà Falling Love của bạn đã được kích hoạt — bạn có thể mở xem trực tiếp, copy link gửi người thương hoặc tạo mã QR ngay bên dưới nhé 💕
+        </p>
+        <div class="pay-success-list" id="paySuccessList">
+          <!-- Item sản phẩm đơn hàng đã thanh toán sẽ được render ở đây -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Order History Actions -->
+  <div class="order-toast" id="orderToast">
+    <i class="fa-solid fa-circle-check" style="color: #ff6b9d;"></i>
+    <span id="orderToastMsg">Đã sao chép! 💕</span>
+  </div>
+
+  <script src="js/preview-storage.js"></script>
+  <script>
+    /* FLOATING HEARTS */
+    (function () {
+      const container = document.getElementById('floatingHearts');
+      const emojis = ['💕', '💖', '🌸', '✨', '💗', '🌷', '💝', '🫧'];
+      for (let i = 0; i < 18; i++) {
+        const el = document.createElement('span');
+        el.className = 'heart-particle';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = (12 + Math.random() * 16) + 's';
+        el.style.animationDelay = (Math.random() * 14) + 's';
+        el.style.fontSize = (10 + Math.random() * 12) + 'px';
+        container.appendChild(el);
+      }
+    })();
+
+    /* XEM MẪU ĐẦY ĐỦ (Dữ liệu mặc định) */
+    const btnViewSample = document.getElementById('btn-view-sample');
+    if (btnViewSample) {
+      btnViewSample.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.open('index.html?sample=1', '_blank', 'noopener,noreferrer');
+      });
+    }
+
+    /* DRAG & DROP */
+    const uploadZone = document.getElementById('uploadZone');
+    uploadZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
+    });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', e => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      if (e.dataTransfer && e.dataTransfer.files.length) {
+        processImages(Array.from(e.dataTransfer.files));
+      }
+    });
+
+    /* MUSIC PLAYER STATE */
+    let musicAudio = null;
+    let selectedMusicSrc = '';
+    let selectedMusicName = '';
+    let musicFileBlob = null;
+
+    /* INTRO INPUTS */
+    const MAX_INTRO = 15;
+    let introItems = [];
+
+    function updateIntroError(index, text) {
+      const inp = document.getElementById('intro-input-' + index);
+      const err = document.getElementById('intro-error-' + index);
+      if (!inp || !err) return;
+      const len = text ? text.length : 0;
+      if (len > 60) {
+        inp.classList.add('input-error');
+        err.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Câu intro đã vượt quá 60 ký tự (hiện có <strong>${len}</strong>/60). Vui lòng rút ngắn lại để hiển thị đẹp mắt nhất!`;
+        err.style.display = 'flex';
+      } else {
+        inp.classList.remove('input-error');
+        err.style.display = 'none';
+        err.innerHTML = '';
+      }
+    }
+
+    function renderIntroInputs() {
+      const list = document.getElementById('introInputList');
+      list.innerHTML = '';
+      const count = introItems.length;
+      introItems.forEach((val, i) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'input-item-wrap';
+        wrap.id = 'intro-wrap-' + i;
+
+        const row = document.createElement('div');
+        row.className = 'input-row';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'input-field';
+        input.id = 'intro-input-' + i;
+        input.placeholder = 'Nhập câu intro (tối đa 60 ký tự)…';
+        input.value = val;
+        input.maxLength = 120;
+        input.addEventListener('input', e => {
+          introItems[i] = e.target.value;
+          updateIntroError(i, e.target.value);
+        });
+
+        row.appendChild(input);
+
+        if (count > 1) {
+          const btnDel = document.createElement('button');
+          btnDel.className = 'btn-delete';
+          btnDel.title = 'Xóa ô nhập này';
+          btnDel.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+          btnDel.addEventListener('click', () => removeIntroInput(i));
+          row.appendChild(btnDel);
+        }
+
+        const errMsg = document.createElement('div');
+        errMsg.className = 'intro-error-msg';
+        errMsg.id = 'intro-error-' + i;
+
+        wrap.appendChild(row);
+        wrap.appendChild(errMsg);
+        list.appendChild(wrap);
+
+        updateIntroError(i, val);
+      });
+
+      document.getElementById('intro-count').textContent = count;
+      const btnAdd = document.getElementById('btn-add-intro');
+      btnAdd.disabled = count >= MAX_INTRO;
+    }
+
+    function addIntroInput() {
+      if (introItems.length >= MAX_INTRO) return;
+      introItems.push('');
+      renderIntroInputs();
+      setTimeout(() => {
+        const last = document.getElementById('intro-input-' + (introItems.length - 1));
+        if (last) last.focus();
+      }, 50);
+    }
+
+    function removeIntroInput(index) {
+      if (introItems.length <= 1) return;
+      introItems.splice(index, 1);
+      renderIntroInputs();
+    }
+
+    introItems.push('');
+    renderIntroInputs();
+
+    /* WISH INPUTS */
+    const MAX_WISH = 15;
+    let wishItems = [];
+
+    function renderWishInputs() {
+      const list = document.getElementById('wishInputList');
+      list.innerHTML = '';
+      const count = wishItems.length;
+      wishItems.forEach((val, i) => {
+        const row = document.createElement('div');
+        row.className = 'input-row';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'input-field';
+        input.id = 'wish-input-' + i;
+        input.placeholder = 'Lời chúc…';
+        input.value = val;
+        input.maxLength = 160;
+        input.addEventListener('input', e => { wishItems[i] = e.target.value; });
+
+        row.appendChild(input);
+
+        if (count > 1) {
+          const btnDel = document.createElement('button');
+          btnDel.className = 'btn-delete';
+          btnDel.title = 'Xóa câu chúc này';
+          btnDel.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+          btnDel.addEventListener('click', () => removeWishInput(i));
+          row.appendChild(btnDel);
+        }
+
+        list.appendChild(row);
+      });
+
+      document.getElementById('wish-count').textContent = count;
+      const btnAdd = document.getElementById('btn-add-wish');
+      btnAdd.disabled = count >= MAX_WISH;
+    }
+
+    function addWishInput() {
+      if (wishItems.length >= MAX_WISH) return;
+      wishItems.push('');
+      renderWishInputs();
+      setTimeout(() => {
+        const last = document.getElementById('wish-input-' + (wishItems.length - 1));
+        if (last) last.focus();
+      }, 50);
+    }
+
+    function removeWishInput(index) {
+      if (wishItems.length <= 1) return;
+      wishItems.splice(index, 1);
+      renderWishInputs();
+    }
+
+    wishItems.push('');
+    renderWishInputs();
+
+    /* IMAGE UPLOAD */
+    const MAX_IMAGES = 15;
+    const MAX_SIZE_MB = 10;
+    let selectedImages = [];
+
+    function handleImageSelect(event) {
+      processImages(Array.from(event.target.files));
+      event.target.value = '';
+    }
+
+    function processImages(files) {
+      const remaining = MAX_IMAGES - selectedImages.length;
+      if (remaining <= 0) {
+        alert('Bạn đã chọn đủ 15 ảnh rồi!');
+        return;
+      }
+      const toProcess = files.slice(0, remaining);
+      let skipped = 0;
+      toProcess.forEach(file => {
+        if (!file.type.startsWith('image/')) { skipped++; return; }
+        if (file.size > MAX_SIZE_MB * 1024 * 1024) { skipped++; return; }
+        selectedImages.push({ file, url: URL.createObjectURL(file) });
+      });
+      if (skipped > 0) alert(skipped + ' ảnh không hợp lệ (không phải ảnh hoặc vượt 10MB) đã bị bỏ qua.');
+      if (files.length > remaining) alert('Chỉ thêm được ' + remaining + ' ảnh nữa. Một số ảnh đã bị bỏ qua.');
+      renderImageGrid();
+    }
+
+    function removeImage(index) {
+      URL.revokeObjectURL(selectedImages[index].url);
+      selectedImages.splice(index, 1);
+      renderImageGrid();
+    }
+
+    function renderImageGrid() {
+      const grid = document.getElementById('imagePreviewGrid');
+      const info = document.getElementById('imageCountInfo');
+      grid.innerHTML = '';
+      if (selectedImages.length === 0) {
+        grid.style.display = 'none';
+        info.style.display = 'none';
+        return;
+      }
+      grid.style.display = 'grid';
+      info.style.display = 'block';
+      document.getElementById('imageCountNum').textContent = selectedImages.length;
+      selectedImages.forEach(({ url }, i) => {
+        const item = document.createElement('div');
+        item.className = 'image-preview-item';
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Anh ' + (i + 1);
+        img.loading = 'lazy';
+        const btnRm = document.createElement('button');
+        btnRm.className = 'image-remove';
+        btnRm.title = 'Xoa anh';
+        btnRm.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        btnRm.addEventListener('click', e => { e.stopPropagation(); removeImage(i); });
+        item.appendChild(img);
+        item.appendChild(btnRm);
+        grid.appendChild(item);
+      });
+    }
+
+    /* ══ USER ACTIONS & LỊCH SỬ ĐƠN HÀNG ══ */
+    // Delegate sang module OrderHistory (js/order-history.js)
+
+    // Hàm cập nhật dữ liệu lịch sử đơn hàng từ server
+    function setOrderHistory(orders) {
+      if (window.OrderHistory) {
+        OrderHistory.setOrders(orders);
+      }
+    }
+
+    // openOrderHistory() → đã chuyển sang api/payment-flow.js
+
+    // Đóng dialog Lịch sử đơn hàng
+    function closeOrderHistory(e) {
+      if (e && e.target && !e.target.classList.contains('dialog-overlay') && e.type === 'click') return;
+      const dlg = document.getElementById('orderHistoryDialog');
+      if (dlg) {
+        dlg.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Nút "Tạo quà tặng ngay" từ empty state
+    function startCreateGiftFromDialog() {
+      closeOrderHistory();
+      const sec = document.getElementById('section-intro');
+      if (sec) {
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          document.getElementById('intro-input-0')?.focus();
+        }, 350);
+      }
+    }
+
+    // Hiển thị toast thông báo
+    let toastTimeout = null;
+    function showOrderToast(msg) {
+      const toast = document.getElementById('orderToast');
+      const toastMsg = document.getElementById('orderToastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg || 'Đã sao chép! 💕';
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    // Render lịch sử đơn hàng — delegate sang module
+    function renderOrderHistory() {
+      if (window.OrderHistory) {
+        OrderHistory.renderOrderHistory();
+      }
+    }
+
+    // Helper functions phục vụ test dữ liệu mẫu (Dev / Demo)
+    window.loadDemoOrderHistory = function () {
+      setOrderHistory([
+        {
+          id: '849201',
+          orderCode: '849201',
+          createdAt: '2026-09-10T03:45:00.000Z',
+          statusCode: 'paid',
+          status: 'Đã thanh toán',
+          title: 'Gửi Người Anh Yêu 💖',
+          amount: 68000,
+          giftUrl: window.location.origin + window.location.pathname.replace('create.html', 'index.html') + '?id=849201',
+          giftId: '849201'
+        },
+        {
+          id: '912035',
+          orderCode: '912035',
+          createdAt: '2026-09-09T08:00:00.000Z',
+          statusCode: 'pending',
+          status: 'Chờ thanh toán',
+          title: 'Tặng Em Yêu 🌹',
+          amount: 52000,
+          giftUrl: '',
+          checkoutUrl: 'https://pay.payos.vn/demo',
+          paymentMethod: 'PAYOS'
+        },
+        {
+          id: '770412',
+          orderCode: '770412',
+          createdAt: '2026-09-08T03:20:00.000Z',
+          statusCode: 'paid',
+          status: 'Đã thanh toán',
+          title: 'Falling Love Gift',
+          amount: 0,
+          giftUrl: window.location.origin + window.location.pathname.replace('create.html', 'index.html') + '?id=770412',
+          giftId: '770412'
+        }
+      ]);
+      openOrderHistory();
+    };
+
+    window.clearOrderHistory = function () {
+      setOrderHistory([]);
+      openOrderHistory();
+    };
+
+    /* ══════════════════════════════════════
+       GOOGLE AUTHENTICATION LOGIC
+       ══════════════════════════════════════ */
+    const AUTH_STORAGE_KEY = 'fl_google_user';
+
+    function getStoredUser() {
+      try {
+        const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function checkAuthState(animate = false) {
+      const user = getStoredUser();
+      const loginBox = document.getElementById('googleLoginBox');
+      const creationWrapper = document.getElementById('creationWrapper');
+      const userNameEl = document.getElementById('userName');
+      const userEmailEl = document.getElementById('userEmail');
+      const userAvatarWrap = document.getElementById('userAvatarWrap');
+
+      if (user && user.isLoggedIn) {
+        // Đã đăng nhập
+        if (loginBox) loginBox.style.display = 'none';
+        if (creationWrapper) {
+          creationWrapper.style.display = 'block';
+          if (animate) {
+            creationWrapper.classList.remove('creation-wrapper');
+            void creationWrapper.offsetWidth; // trigger reflow
+            creationWrapper.classList.add('creation-wrapper');
+          }
+        }
+        if (userNameEl) {
+          userNameEl.textContent = user.name || (user.email ? user.email.split('@')[0] : 'Người dùng');
+        }
+        if (userEmailEl) {
+          userEmailEl.textContent = user.email || '';
+        }
+        if (userAvatarWrap) {
+          // Bắt buộc referrerpolicy="no-referrer" để ảnh Google không bị lỗi 403 Forbidden (theo hướng dẫn)
+          userAvatarWrap.innerHTML = user.avatar
+            ? `<img src="${user.avatar}" alt="Avatar" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\\'fa-solid fa-user\\'></i>';">`
+            : `<i class="fa-solid fa-user"></i>`;
+        }
+
+        // Bắn Custom Event để các module khác có thể lắng nghe
+        window.dispatchEvent(new CustomEvent('app-auth-changed', {
+          detail: { user, isLoggedIn: true }
+        }));
+      } else {
+        // Chưa đăng nhập: Hiện login card, ẩn các phần tạo
+        if (loginBox) {
+          loginBox.style.display = 'block';
+          if (animate) {
+            const card = loginBox.querySelector('.login-card');
+            if (card) {
+              card.style.animation = 'none';
+              void card.offsetWidth;
+              card.style.animation = 'loginCardAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+            }
+          }
+        }
+        if (creationWrapper) {
+          creationWrapper.style.display = 'none';
+        }
+        if (userNameEl) userNameEl.textContent = '';
+        if (userEmailEl) userEmailEl.textContent = '';
+        if (userAvatarWrap) userAvatarWrap.innerHTML = `<i class="fa-solid fa-user"></i>`;
+
+        window.dispatchEvent(new CustomEvent('app-auth-changed', {
+          detail: { user: null, isLoggedIn: false }
+        }));
+      }
+    }
+
+    /**
+     * Bắt buộc đăng nhập trước khi thực hiện thao tác (theo huong-dan-dang-nhap-google.md)
+     * @param {HTMLElement|string} loginBtnElement
+     */
+    function requireLogin(loginBtnElement = 'btnGoogleLogin') {
+      const user = getStoredUser();
+      if (user && user.isLoggedIn) return user;
+
+      const el = typeof loginBtnElement === 'string'
+        ? document.getElementById(loginBtnElement)
+        : loginBtnElement;
+
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.focus();
+        el.classList.add('auth-highlight-shake');
+        setTimeout(() => el.classList.remove('auth-highlight-shake'), 1200);
+      }
+      return null;
+    }
+    window.requireLogin = requireLogin;
+
+    // loginWithGoogle() + logout() → đã chuyển sang api/payment-flow.js
+
+    /* CREATE GIFT */
+    function createGift() {
+      const introTexts = introItems.filter(s => s.trim() !== '');
+      const wishTexts = wishItems.filter(s => s.trim() !== '');
+      if (introTexts.length === 0) {
+        alert('Vui long nhap it nhat 1 cau intro!');
+        document.getElementById('intro-input-0')?.focus();
+        return;
+      }
+      if (introTexts.some(s => s.length > 60)) {
+        alert('Mỗi ô câu intro không được vượt quá 60 ký tự!');
+        return;
+      }
+      if (wishTexts.length === 0) {
+        alert('Vui long nhap it nhat 1 loi chuc!');
+        document.getElementById('wish-input-0')?.focus();
+        return;
+      }
+      console.log({ intro: introTexts, wishes: wishTexts, images: selectedImages.map(i => i.file.name) });
+    }
+
+    /* PAYMENT LOGIC */
+    const BASE_PRICE = 49000;
+    const FOREVER_PRICE = 19000;
+    const PRICE_INTRO = 3000;
+    const PRICE_PHOTO = 3000;
+    const PRICE_WISH = 2000;
+    const FREE_INTRO = 3;
+    const FREE_PHOTO = 2;
+    const FREE_WISH = 2;
+    let isForever = false;
+
+    function fmt(n) {
+      return n.toLocaleString('vi-VN') + ' đ';
+    }
+
+    function updateTotal() {
+      const introCount = introItems.length;
+      const photoCount = selectedImages.length;
+      const wishCount = wishItems.length;
+
+      const extraIntro = Math.max(0, introCount - FREE_INTRO);
+      const extraPhoto = Math.max(0, photoCount - FREE_PHOTO);
+      const extraWish = Math.max(0, wishCount - FREE_WISH);
+
+      const costIntro = extraIntro * PRICE_INTRO;
+      const costPhoto = extraPhoto * PRICE_PHOTO;
+      const costWish = extraWish * PRICE_WISH;
+      const costForever = isForever ? FOREVER_PRICE : 0;
+      const total = BASE_PRICE + costIntro + costPhoto + costWish + costForever;
+
+      const rowIntro = document.getElementById('row-extra-intro');
+      if (rowIntro) {
+        document.getElementById('label-extra-intro').textContent = extraIntro > 0 ? extraIntro + ' câu intro thêm (+3.000đ/câu)' : 'Nội dung intro thêm (3 câu đầu miễn phí)';
+        document.getElementById('price-extra-intro').textContent = extraIntro > 0 ? '+' + fmt(costIntro) : '0 đ';
+      }
+
+      const rowPhoto = document.getElementById('row-extra-photo');
+      if (rowPhoto) {
+        document.getElementById('label-extra-photo').textContent = extraPhoto > 0 ? extraPhoto + ' ảnh thêm (+3.000đ/ảnh)' : 'Ảnh thêm (2 ảnh đầu miễn phí)';
+        document.getElementById('price-extra-photo').textContent = extraPhoto > 0 ? '+' + fmt(costPhoto) : '0 đ';
+      }
+
+      const rowWish = document.getElementById('row-extra-wish');
+      if (rowWish) {
+        document.getElementById('label-extra-wish').textContent = extraWish > 0 ? extraWish + ' câu chúc thêm (+2.000đ/câu)' : 'Câu chúc thêm (2 câu đầu miễn phí)';
+        document.getElementById('price-extra-wish').textContent = extraWish > 0 ? '+' + fmt(costWish) : '0 đ';
+      }
+
+      const rowForever = document.getElementById('row-forever');
+      if (rowForever) rowForever.style.display = isForever ? 'flex' : 'none';
+
+      const totalEl = document.getElementById('totalPrice');
+      if (totalEl) totalEl.textContent = fmt(total);
+    }
+
+    // Patch render functions để cập nhật giá tự động
+    const _origRenderIntro = renderIntroInputs;
+    renderIntroInputs = function () { _origRenderIntro(); updateTotal(); };
+
+    const _origRenderWish = renderWishInputs;
+    renderWishInputs = function () { _origRenderWish(); updateTotal(); };
+
+    const _origRenderGrid = renderImageGrid;
+    renderImageGrid = function () { _origRenderGrid(); updateTotal(); };
+
+    let selectedMethod = 'domestic';
+
+    function selectPayment(type) {
+      selectedMethod = type;
+      var opts = document.querySelectorAll('.payment-method-group .radio-option');
+      for (var i = 0; i < opts.length; i++) {
+        opts[i].classList.remove('selected');
+      }
+      var target = document.getElementById('opt-' + type);
+      if (target) {
+        target.classList.add('selected');
+      }
+    }
+
+    // Event delegation: bắt click trên parent, tìm .radio-option gần nhất
+    document.querySelector('.payment-method-group').addEventListener('click', function (e) {
+      var option = e.target.closest('.radio-option');
+      if (!option) return;
+      if (option.id === 'opt-domestic') {
+        selectPayment('domestic');
+      } else if (option.id === 'opt-international') {
+        selectPayment('international');
+      }
+    });
+
+    function toggleForever() {
+      isForever = !isForever;
+      const box = document.getElementById('foreverBox');
+      const custom = document.getElementById('foreverCustom');
+      if (box) box.classList.toggle('checked', isForever);
+      if (custom) custom.innerHTML = isForever ? '<i class="fa-solid fa-check"></i>' : '';
+      updateTotal();
+    }
+
+    /* ══════════════════════════════════════
+       MANDATORY FIELDS VALIDATION SYSTEM
+       ══════════════════════════════════════ */
+    let currentMissingItems = [];
+
+    function checkMandatoryFields() {
+      const missing = [];
+
+      // 1. Kiểm tra Lời ngỏ (Intro)
+      const validIntro = introItems.map(s => s.trim()).filter(Boolean);
+      if (validIntro.length === 0) {
+        missing.push({
+          id: 'intro',
+          icon: 'fa-solid fa-pen-nib',
+          name: 'Lời ngỏ (Intro)',
+          desc: 'Chưa nhập câu intro nào (Tối thiểu 1 câu để xuất hiện hiệu ứng hạt 3D)',
+          targetId: 'section-intro',
+          focusId: 'intro-input-0'
+        });
+      } else if (introItems.some(s => s.trim() === '') && introItems.length > 1) {
+        const emptyIndex = introItems.findIndex(s => s.trim() === '');
+        missing.push({
+          id: 'intro',
+          icon: 'fa-solid fa-pen-nib',
+          name: 'Lời ngỏ (Intro)',
+          desc: 'Có ô intro còn đang để trống, vui lòng nhập nội dung hoặc bấm nút Xóa (✕)',
+          targetId: 'section-intro',
+          focusId: 'intro-input-' + emptyIndex
+        });
+      } else if (introItems.some(s => s.trim().length > 60)) {
+        const overIndex = introItems.findIndex(s => s.trim().length > 60);
+        missing.push({
+          id: 'intro',
+          icon: 'fa-solid fa-pen-nib',
+          name: 'Lời ngỏ (Intro)',
+          desc: `Câu intro thứ ${overIndex + 1} vượt quá 60 ký tự (tối đa 60 ký tự/câu)`,
+          targetId: 'section-intro',
+          focusId: 'intro-input-' + overIndex
+        });
+      }
+
+      // 2. Kiểm tra Nhạc nền
+      const hasMusic = (selectedMusicSrc && selectedMusicSrc.trim() !== '') || musicFileBlob !== null;
+      if (!hasMusic) {
+        missing.push({
+          id: 'music',
+          icon: 'fa-solid fa-music',
+          name: 'Nhạc nền quà tặng',
+          desc: 'Chưa chọn bài hát từ danh sách hoặc chưa tải lên file nhạc MP3',
+          targetId: 'musicDropdown',
+          focusId: 'dropdownToggle'
+        });
+      }
+
+      // 3. Kiểm tra Lời chúc yêu thương
+      const validWishes = wishItems.map(s => s.trim()).filter(Boolean);
+      if (validWishes.length === 0) {
+        missing.push({
+          id: 'wishes',
+          icon: 'fa-solid fa-heart',
+          name: 'Lời chúc yêu thương',
+          desc: 'Chưa nhập câu chúc nào (Tối thiểu 1 câu chúc để bay trong không gian 3D)',
+          targetId: 'section-wishes',
+          focusId: 'wish-input-0'
+        });
+      } else if (wishItems.some(s => s.trim() === '') && wishItems.length > 1) {
+        const emptyWishIndex = wishItems.findIndex(s => s.trim() === '');
+        missing.push({
+          id: 'wishes',
+          icon: 'fa-solid fa-heart',
+          name: 'Lời chúc yêu thương',
+          desc: 'Có ô câu chúc còn đang để trống, vui lòng nhập nội dung hoặc bấm nút Xóa (✕)',
+          targetId: 'section-wishes',
+          focusId: 'wish-input-' + emptyWishIndex
+        });
+      }
+
+      return missing;
+    }
+
+    function openValidationDialog(missingList, actionName = 'xem trước') {
+      currentMissingItems = missingList || [];
+      const listContainer = document.getElementById('validationMissingList');
+      const promptEl = document.getElementById('validationActionPrompt');
+      if (promptEl) {
+        promptEl.textContent = 'Vui lòng hoàn thành các thông tin bắt buộc dưới đây trước khi ' + actionName + ':';
+      }
+
+      if (listContainer) {
+        listContainer.innerHTML = '';
+        currentMissingItems.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'validation-missing-item';
+          row.innerHTML = `
+            <div class="validation-item-left">
+              <div class="validation-item-icon">
+                <i class="${item.icon}"></i>
+              </div>
+              <div class="validation-item-text">
+                <div class="validation-item-name">${item.name}</div>
+                <div class="validation-item-desc">${item.desc}</div>
+              </div>
+            </div>
+            <button class="btn-item-jump" onclick="jumpToField('${item.targetId}', '${item.focusId}')">
+              Bổ sung <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          `;
+          listContainer.appendChild(row);
+        });
+      }
+
+      const dlg = document.getElementById('validationDialog');
+      if (dlg) {
+        dlg.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeValidationDialog(e) {
+      if (e && e.target && !e.target.classList.contains('dialog-overlay') && e.type === 'click') return;
+      const dlg = document.getElementById('validationDialog');
+      if (dlg) {
+        dlg.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function jumpToField(targetId, focusId) {
+      closeValidationDialog();
+      setTimeout(() => {
+        const el = document.getElementById(targetId) || document.getElementById(focusId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('field-highlight-pulse');
+          setTimeout(() => el.classList.remove('field-highlight-pulse'), 1800);
+        }
+        const focusEl = document.getElementById(focusId);
+        if (focusEl) {
+          setTimeout(() => {
+            focusEl.focus();
+            if (focusId === 'dropdownToggle') {
+              const dropdown = document.getElementById('musicDropdown');
+              const list = document.getElementById('dropdownList');
+              if (dropdown && list && !list.classList.contains('open')) {
+                toggleMusicDropdown();
+              }
+            }
+          }, 350);
+        }
+      }, 250);
+    }
+
+    function fixFirstMissingItem() {
+      if (currentMissingItems.length > 0) {
+        const first = currentMissingItems[0];
+        jumpToField(first.targetId, first.focusId);
+      } else {
+        closeValidationDialog();
+      }
+    }
+
+    async function previewGift() {
+      const btn = document.getElementById('btn-preview-gift');
+      if (btn && btn.classList.contains('loading')) return;
+
+      // Kiểm tra các trường bắt buộc
+      const missing = checkMandatoryFields();
+      if (missing.length > 0) {
+        openValidationDialog(missing, 'xem trước');
+        return;
+      }
+
+      const introTexts = introItems.map(s => s.trim()).filter(Boolean);
+      const wishTexts = wishItems.map(s => s.trim()).filter(Boolean);
+
+      // Thu thập danh sách ảnh
+      const imageFiles = selectedImages.map(item => item.file);
+      const imageUrls = selectedImages.map(item => item.url);
+
+      // Chuẩn bị dữ liệu xem trước
+      const currentData = {
+        intro: introTexts,
+        wishes: wishTexts,
+        music: selectedMusicSrc || '',
+        musicName: selectedMusicName || '',
+        musicBlob: musicFileBlob || null,
+        images: imageFiles,
+        imageUrls: imageUrls
+      };
+
+      // 1. Gán vào in-memory window để window.opener đọc được ngay tức khắc
+      window.__currentGiftData = currentData;
+
+      // 2. Lưu vào PreviewStorage (localStorage + IndexedDB)
+      if (btn) {
+        btn.classList.add('loading');
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang mở xem trước…';
+      }
+
+      try {
+        if (typeof PreviewStorage !== 'undefined') {
+          await PreviewStorage.save({
+            intro: introTexts,
+            wishes: wishTexts,
+            musicSrc: selectedMusicSrc || '',
+            musicName: selectedMusicName || '',
+            musicBlob: musicFileBlob || null,
+            images: imageFiles,
+            imageUrls: imageUrls
+          });
+        }
+      } catch (err) {
+        console.warn('Lỗi lưu preview storage:', err);
+      } finally {
+        if (btn) {
+          btn.classList.remove('loading');
+          btn.innerHTML = '<i class="fa-solid fa-eye"></i> Xem trước';
+        }
+      }
+
+      // Thông báo nhẹ cho người dùng
+      showOrderToast('Đang mở bản xem trước với dữ liệu của bạn... 💕');
+
+      // 3. Mở tab index.html?preview=1
+      const previewUrl = 'index.html?preview=1';
+      const previewWin = window.open(previewUrl, '_blank');
+      if (!previewWin || previewWin.closed || typeof previewWin.closed === 'undefined') {
+        window.location.href = previewUrl;
+      }
+    }
+
+    // payGift() + openPaymentDialog() + closePaymentDialog() → đã chuyển sang api/payment-flow.js
+
+
+    // Khởi tạo
+    checkAuthState();
+    if (typeof checkAuthOnPageLoad === 'function') {
+      checkAuthOnPageLoad();
+    }
+    updateTotal();
+    selectPayment('domestic');
+
+    /* ══════════════════════════════════════
+       MUSIC PLAYER
+       ══════════════════════════════════════ */
+
+    function formatTime(sec) {
+      if (!sec || isNaN(sec)) return '0:00';
+      var m = Math.floor(sec / 60);
+      var s = Math.floor(sec % 60);
+      return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function loadMusic(src, name) {
+      if (musicAudio) {
+        musicAudio.pause();
+        musicAudio.removeEventListener('timeupdate', onTimeUpdate);
+        musicAudio.removeEventListener('loadedmetadata', onMetaLoaded);
+        musicAudio.removeEventListener('ended', onEnded);
+      }
+
+      musicAudio = new Audio(src);
+      selectedMusicSrc = src;
+      selectedMusicName = name;
+
+      document.getElementById('playerSongText').textContent = name;
+      document.getElementById('playerCurrentTime').textContent = '0:00';
+      document.getElementById('playerDuration').textContent = '0:00';
+      document.getElementById('playerProgress').style.width = '0%';
+      document.getElementById('playerIcon').className = 'fa-solid fa-play';
+
+      var player = document.getElementById('audioPlayer');
+      player.classList.add('visible');
+
+      musicAudio.addEventListener('loadedmetadata', onMetaLoaded);
+      musicAudio.addEventListener('timeupdate', onTimeUpdate);
+      musicAudio.addEventListener('ended', onEnded);
+
+      musicAudio.play().catch(function () { });
+      document.getElementById('playerIcon').className = 'fa-solid fa-pause';
+    }
+
+    function onMetaLoaded() {
+      document.getElementById('playerDuration').textContent = formatTime(musicAudio.duration);
+    }
+
+    function onTimeUpdate() {
+      var cur = musicAudio.currentTime;
+      var dur = musicAudio.duration;
+      document.getElementById('playerCurrentTime').textContent = formatTime(cur);
+      if (dur > 0) {
+        document.getElementById('playerProgress').style.width = (cur / dur * 100) + '%';
+      }
+    }
+
+    function onEnded() {
+      document.getElementById('playerIcon').className = 'fa-solid fa-play';
+      document.getElementById('playerProgress').style.width = '0%';
+      document.getElementById('playerCurrentTime').textContent = '0:00';
+    }
+
+    function togglePlay() {
+      if (!musicAudio) return;
+      if (musicAudio.paused) {
+        musicAudio.play();
+        document.getElementById('playerIcon').className = 'fa-solid fa-pause';
+      } else {
+        musicAudio.pause();
+        document.getElementById('playerIcon').className = 'fa-solid fa-play';
+      }
+    }
+
+    function seekAudio(e) {
+      if (!musicAudio || !musicAudio.duration) return;
+      var wrap = document.getElementById('progressWrap');
+      var rect = wrap.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var pct = Math.max(0, Math.min(1, x / rect.width));
+      musicAudio.currentTime = pct * musicAudio.duration;
+    }
+
+    /* Custom Dropdown */
+    function toggleMusicDropdown() {
+      var toggle = document.getElementById('dropdownToggle');
+      var list = document.getElementById('dropdownList');
+      var isOpen = toggle.classList.contains('open');
+      if (isOpen) {
+        toggle.classList.remove('open', 'open-up');
+        list.classList.remove('open', 'drop-up');
+      } else {
+        // Check available space below
+        var rect = toggle.getBoundingClientRect();
+        var spaceBelow = window.innerHeight - rect.bottom;
+        var spaceAbove = rect.top;
+        var listHeight = Math.min(400, list.scrollHeight || 400);
+
+        list.classList.remove('drop-up');
+        toggle.classList.remove('open-up');
+
+        if (spaceBelow < listHeight && spaceAbove > spaceBelow) {
+          list.classList.add('drop-up');
+          toggle.classList.add('open-up');
+        }
+
+        toggle.classList.add('open');
+        list.classList.add('open');
+      }
+    }
+
+    function selectMusicItem(el) {
+      var val = el.getAttribute('data-value');
+      var name = el.querySelector('.dropdown-item-name').textContent;
+
+      // Update toggle text
+      var textEl = document.getElementById('dropdownText');
+      textEl.textContent = name;
+      textEl.classList.remove('placeholder');
+
+      // Update selected state
+      var items = document.querySelectorAll('#dropdownList .dropdown-item');
+      items.forEach(function (item) { item.classList.remove('selected'); });
+      el.classList.add('selected');
+
+      // Close dropdown
+      document.getElementById('dropdownToggle').classList.remove('open');
+      document.getElementById('dropdownList').classList.remove('open');
+
+      // Reset file input
+      document.getElementById('musicFileInput').value = '';
+      musicFileBlob = null;
+
+      // Load and play
+      loadMusic(val, name);
+    }
+
+    // Close dropdown on click outside
+    document.addEventListener('click', function (e) {
+      var dropdown = document.getElementById('musicDropdown');
+      if (dropdown && !dropdown.contains(e.target)) {
+        document.getElementById('dropdownToggle').classList.remove('open');
+        document.getElementById('dropdownList').classList.remove('open');
+      }
+    });
+
+    function onMusicFileChange(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      if (!file.name.toLowerCase().endsWith('.mp3')) {
+        alert('Vui lòng chọn file định dạng .mp3');
+        e.target.value = '';
+        return;
+      }
+
+      // Reset custom dropdown
+      var textEl = document.getElementById('dropdownText');
+      textEl.textContent = 'Chọn nhạc mẫu...';
+      textEl.classList.add('placeholder');
+      var items = document.querySelectorAll('#dropdownList .dropdown-item');
+      items.forEach(function (item) { item.classList.remove('selected'); });
+
+      musicFileBlob = file;
+      var url = URL.createObjectURL(file);
+      var name = file.name.replace('.mp3', '').replace('.MP3', '');
+      loadMusic(url, name);
+    }
+
+    /* Guide Dialog */
+    function openGuideDialog() {
+      document.getElementById('guideDialog').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGuideDialog(e) {
+      if (e && e.target && !e.target.classList.contains('dialog-overlay') && e.type === 'click') return;
+      document.getElementById('guideDialog').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Đóng dialog khi nhấn phím Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeGuideDialog();
+        closeOrderHistory();
+        closeValidationDialog();
+        closePaymentDialog();
+      }
+    });
+  </script>
+
+</body>
+
+</html>

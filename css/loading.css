@@ -1,0 +1,111 @@
+/* ==========================================================
+   Loading Screen Overlay Stylesheet
+   Theo chuẩn LOADING_SCREEN_GUIDE.md
+   ========================================================== */
+
+/* Trạng thái ẩn: display none triệt để */
+#transition-loading-overlay[hidden],
+.loading-overlay[hidden] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Toàn màn hình overlay */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255, 82, 157, 0.16), transparent 38%),
+    linear-gradient(160deg, #180613 0%, #080107 58%, #000000 100%);
+  user-select: none;
+  -webkit-user-select: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Hộp thông báo trung tâm */
+.loading-card {
+  width: min(360px, 100%);
+  text-align: center;
+  padding: 28px 24px 24px;
+  border-radius: 20px;
+  background: rgba(12, 4, 10, 0.72);
+  border: 1px solid rgba(233, 30, 99, 0.35);
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(233, 30, 99, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Tiêu đề */
+.loading-title {
+  margin: 0 0 8px;
+  font-family: "Be Vietnam Pro", "Segoe UI", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #e91e63;
+  letter-spacing: 0.02em;
+}
+
+/* Dòng phụ đề trạng thái */
+.loading-sub {
+  margin: 0 0 20px;
+  font-family: "Quicksand", "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #c2185b;
+  opacity: 0.95;
+}
+
+/* Khung rãnh tiến trình */
+.loading-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(233, 30, 99, 0.18);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* Thanh tiến trình chạy */
+.loading-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #c2185b 0%, #e91e63 50%, #ad1457 100%);
+  transition: width 0.22s ease-out;
+  box-shadow: 0 0 12px rgba(233, 30, 99, 0.55);
+}
+
+/* Hiển thị số phần trăm */
+.loading-pct {
+  margin: 0;
+  font-family: "Be Vietnam Pro", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #e91e63;
+}
+
+/* Responsive cho màn hình ngang chiều cao thấp (landscape mobile) */
+@media (max-height: 560px) and (orientation: landscape) {
+  .loading-overlay {
+    padding: 12px;
+  }
+  .loading-card {
+    width: min(320px, 100%);
+    padding: 18px 20px 16px;
+  }
+  .loading-title {
+    font-size: 1rem;
+  }
+  .loading-sub {
+    margin-bottom: 12px;
+    font-size: 0.8rem;
+  }
+}
