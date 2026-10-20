@@ -6682,18 +6682,18 @@ function Zr({ client: e, clientId: t }) {
                   position: [0, 0, typeof window !== "undefined" && window.innerWidth < 768 ? 38 : 30],
                   fov: typeof window !== "undefined" && window.innerWidth < 768 ? 68 : 95
                 },
-                dpr: [1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1, 1.5)],
+                dpr: [1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1, 2.5)],
                 gl: { antialias: !0, alpha: !0, powerPreference: "high-performance" },
                 children: [
                   B.jsx("ambientLight", { intensity: 1 }),
                   B.jsx(rn, {}),
                   B.jsx(Mr, {
                     children: B.jsx(Dr, {
-                      intensity: 1.6,
-                      luminanceThreshold: 0.25,
-                      luminanceSmoothing: 0.75,
-                      height: 480,
-                      kernelSize: 4,
+                      intensity: 1.2,
+                      luminanceThreshold: 0.85,
+                      luminanceSmoothing: 0.3,
+                      height: 1024,
+                      kernelSize: 3,
                     }),
                   }),
                   B.jsx("pointLight", {
@@ -6958,8 +6958,8 @@ class PhotoTexLoader {
     // Hàm xử lý khi image load thành công → vẽ lên canvas → tạo texture
     function processImage(img) {
       try {
-        const pad = 18;
-        const maxEdge = 512;
+        const pad = 12;
+        const maxEdge = 1024;
         const imgAspect = img.width / img.height;
         let targetW, targetH;
         if (imgAspect >= 1) {
@@ -6970,7 +6970,7 @@ class PhotoTexLoader {
           targetW = Math.round(maxEdge * imgAspect);
         }
 
-        const cr = Math.min(36, Math.max(16, Math.round(Math.min(targetW, targetH) * 0.08)));
+        const cr = Math.min(32, Math.max(16, Math.round(Math.min(targetW, targetH) * 0.06)));
         const canvasW = targetW + pad * 2;
         const canvasH = targetH + pad * 2;
 
@@ -6993,14 +6993,7 @@ class PhotoTexLoader {
         o.closePath();
         o.clip();
 
-        o.filter = "contrast(1.15) saturate(1.2)";
         o.drawImage(img, pad, pad, targetW, targetH);
-        o.filter = "none";
-        // Giảm sáng: phủ lớp tối lên ảnh
-        o.globalCompositeOperation = "multiply";
-        o.fillStyle = "rgba(0, 0, 0, 0.28)";
-        o.fillRect(pad, pad, targetW, targetH);
-        o.globalCompositeOperation = "source-over";
         o.restore();
 
         o.save();
@@ -7015,29 +7008,34 @@ class PhotoTexLoader {
         o.lineTo(pad, pad + cr);
         o.quadraticCurveTo(pad, pad, pad + cr, pad);
         o.closePath();
-        o.lineWidth = 5;
-        o.strokeStyle = "rgba(255, 255, 255, 0.55)";
+        o.lineWidth = 4;
+        o.strokeStyle = "rgba(255, 255, 255, 0.65)";
         o.stroke();
         o.restore();
 
         const m = new Rs();
         m.image = r;
         m.aspectRatio = canvasW / canvasH;
+        m.generateMipmaps = true;
+        m.minFilter = 1008;
+        m.magFilter = 1006;
         m.needsUpdate = true;
         m.colorSpace = q;
         t(m);
       } catch (err) {
-        // Canvas tainted hoặc filter lỗi → tạo texture đơn giản từ ảnh gốc
         console.warn("[PhotoTexLoader] processImage error, using raw image:", err);
         try {
           var c = document.createElement("canvas");
-          c.width = Math.min(img.width, 512);
-          c.height = Math.min(img.height, 512);
+          c.width = Math.min(img.width, 1024);
+          c.height = Math.min(img.height, 1024);
           var cx = c.getContext("2d");
           cx.drawImage(img, 0, 0, c.width, c.height);
           var m2 = new Rs();
           m2.image = c;
           m2.aspectRatio = c.width / c.height;
+          m2.generateMipmaps = true;
+          m2.minFilter = 1008;
+          m2.magFilter = 1006;
           m2.needsUpdate = true;
           m2.colorSpace = q;
           t(m2);
@@ -7156,9 +7154,9 @@ function PhotoRain() {
 
   const isMob = typeof window !== "undefined" && window.innerWidth < 768;
   const t = [];
-  const zLayers = isMob ? [-18, -10, -2, 6] : [-20, -8, 4, 16];
+  const zLayers = isMob ? [-12, -4, 4] : [-20, -8, 4, 16];
   const xCols = isMob ? [-8.0, 0, 8.0] : [-24, -12, 0, 12, 24];
-  const itemBaseSize = isMob ? 5.0 : 7.2;
+  const itemBaseSize = isMob ? 6.2 : 7.2;
   const total = zLayers.length * xCols.length;
   let idx = 0;
   for (let r = 0; r < zLayers.length; r++) {
