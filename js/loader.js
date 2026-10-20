@@ -164,15 +164,15 @@
         pageData.props.name = "Chi";
         pageData.props.client.messages = [
           "Chúc mừng ngày 20/10,\nChi nhé! 💐",
-          "Chúc Chi luôn xinh đẹp,\nrạng rỡ & yêu đời ✨",
-          "Mỗi ngày của Chi\nđều ngập tràn niềm vui 🌸",
-          "Mong mọi điều bình yên\nvà may mắn đến với Chi ✨",
+          "20/10 thật nhiều niềm vui,\nluôn tươi cười rạng rỡ ✨",
+          "Chúc Chi luôn xinh đẹp,\ntrẻ trung & yêu đời 🌸",
+          "Mỗi ngày của Chi\nđều tràn ngập niềm vui ✨",
+          "Nhận thật nhiều hoa,\nquà và yêu thương nhé 🎁",
           "Công việc luôn thuận lợi,\nvạn sự hanh thông nhé 🍀",
           "Luôn giữ nụ cười tươi\nvà năng lượng tích cực 🌟",
           "Mong Chi luôn an nhiên,\nsống trọn vẹn mỗi ngày 🌷",
           "Ăn ngon ngủ ngon,\nmỗi ngày đều thật chill ☕",
           "Tự tin toả sáng\nvà luôn là chính mình ✨",
-          "Tuổi mới thêm rực rỡ,\ngặt hái nhiều thành công 🎯",
           "Mong những điều ngọt ngào\nluôn đồng hành cùng Chi 🌸",
           "Luôn mạnh khoẻ, bình an\nvà gặp nhiều điều may 🍀"
         ];
