@@ -170,7 +170,7 @@
           "Yêu thương và trân trọng Chi thật nhiều 💖"
         ];
         pageData.props.client.images = defaultPhotos;
-        pageData.props.client.music = "assets/music/loveMusic/Hngle - Tìm em ft (mp3cut.net).mp3";
+        pageData.props.client.music = "assets/music/cho-anh-chut-thoi.mp3";
         pageData.props.client.fontName = "Mali";
         pageData.props.client.color = "#ff6b9d";
         sampleApp.dataset.page = JSON.stringify(pageData);

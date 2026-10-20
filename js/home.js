@@ -6606,7 +6606,7 @@ function Zr({ client: e, clientId: t }) {
         (e && e.music) ||
         (window.Heartlove && window.Heartlove.data && window.Heartlove.data.music) ||
         (window.dataChristmasTree && window.dataChristmasTree.data && window.dataChristmasTree.data.backgroundMusic) ||
-        "assets/music/loveMusic/Hngle - Tìm em ft (mp3cut.net).mp3";
+        "assets/music/cho-anh-chut-thoi.mp3";
 
       let audio = window.__introAudio;
       if (!audio) {
