@@ -6679,8 +6679,8 @@ function Zr({ client: e, clientId: t }) {
                   background: "transparent",
                 },
                 camera: {
-                  position: [0, 0, typeof window !== "undefined" && window.innerWidth < 768 ? 40 : 30],
-                  fov: typeof window !== "undefined" && window.innerWidth < 768 ? 65 : 95
+                  position: [0, 0, typeof window !== "undefined" && window.innerWidth < 768 ? 38 : 30],
+                  fov: typeof window !== "undefined" && window.innerWidth < 768 ? 68 : 95
                 },
                 dpr: [1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1, 1.5)],
                 gl: { antialias: !0, alpha: !0, powerPreference: "high-performance" },
@@ -6731,12 +6731,12 @@ function Hr({ color: e, messages: t, fontName: i }) {
   let a = 0;
 
   if (isMob) {
-    const mobX = [-6.5, -2.2, 2.2, 6.5];
+    const mobX = [-11.5, -5.8, 0, 5.8, 11.5];
     const mobZ = [-20, -11, -2, 7];
     for (let l = 0; l < mobZ.length; l++) {
       for (let d = 0; d < mobX.length; d++) {
         const m = t[a % t.length];
-        const startX = mobX[d] + (l % 2 === 0 ? 0.6 : -0.6);
+        const startX = mobX[d] + (l % 2 === 0 ? 0.8 : -0.8);
         const startZ = mobZ[l] + (d % 2 === 0 ? 0.8 : -0.8);
         o.push(
           B.jsx(
@@ -6748,8 +6748,8 @@ function Hr({ color: e, messages: t, fontName: i }) {
               startZ: startZ,
               speed: 5 + Math.random() * 2,
               delay: Math.random() * 2.5,
-              fontSize: 0.68,
-              maxWidth: 9.0,
+              fontSize: 0.82,
+              maxWidth: 9.8,
               color: e ?? "#EE66A6",
               font: i
                 ? new URL(`../assets/font/${i}.ttf`, import.meta.url).href
@@ -6819,8 +6819,8 @@ function Nr({
     v = new He(),
     O = 2.5,
     isMob = typeof window !== "undefined" && window.innerWidth < 768,
-    actualFontSize = customFontSize || (isMob ? 0.68 : 1.15),
-    actualMaxWidth = customMaxWidth || (isMob ? 9.0 : 18);
+    actualFontSize = customFontSize || (isMob ? 0.82 : 1.15),
+    actualMaxWidth = customMaxWidth || (isMob ? 9.8 : 18);
 
   return (
     Je((w) => {
@@ -7150,9 +7150,9 @@ function PhotoRain() {
 
   const isMob = typeof window !== "undefined" && window.innerWidth < 768;
   const t = [];
-  const zLayers = isMob ? [-16, -6, 4] : [-20, -8, 4, 16];
-  const xCols = isMob ? [-7.2, -2.4, 2.4, 7.2] : [-24, -12, 0, 12, 24];
-  const itemBaseSize = isMob ? 4.2 : 7.2;
+  const zLayers = isMob ? [-18, -10, -2, 6] : [-20, -8, 4, 16];
+  const xCols = isMob ? [-12.5, -6.2, 0, 6.2, 12.5] : [-24, -12, 0, 12, 24];
+  const itemBaseSize = isMob ? 5.2 : 7.2;
   const total = zLayers.length * xCols.length;
   let idx = 0;
   for (let r = 0; r < zLayers.length; r++) {
