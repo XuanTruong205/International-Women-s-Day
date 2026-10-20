@@ -221,7 +221,7 @@ function z() {
         (x && 0 !== x.length) ||
         (x = [
             "Chúc Mừng 20/10 💐",
-            "Gửi Đến Chi Yêu Thương 💕",
+            "Gửi Đến Chi Ree 💕",
             "Chúc Chi Luôn Xinh Đẹp ✨",
             "Rạng Rỡ & Hạnh Phúc 💖"
         ]));

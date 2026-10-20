@@ -72,7 +72,7 @@ const DEFAULT = {
   popupMessage: '💖 Chúc Chi ngày 20/10 thật nhiều niềm vui, luôn xinh đẹp rạng ngời và hạnh phúc trọn vẹn! Cảm ơn Chi vì đã luôn mang lại những điều tuyệt vời và nụ cười ấm áp. Mong mọi điều tốt lành, may mắn và ngọt ngào nhất luôn đồng hành cùng Chi! 💐💕',
   messages: [
     'Chúc Mừng 20/10 💐',
-    'Gửi Đến Chi Yêu Thương 💕',
+    'Gửi Đến Chi Ree 💕',
     'Chúc Chi Luôn Xinh Đẹp ✨',
     'Rạng Rỡ & Hạnh Phúc 💖'
   ],
