@@ -67,14 +67,14 @@ const DEFAULT_IMAGES = [
 
 /* ── Dữ liệu mặc định (fallback khi không có server) ────── */
 const DEFAULT = {
-  title:        'Chúc Mừng 20/10 - Gửi Chi 💖',
+  title:        'Chúc Mừng 20/10 - Gửi Chi ✨',
   music:        'assets/music/cho-anh-chut-thoi.mp3',
-  popupMessage: '💖 Chúc Chi ngày 20/10 thật nhiều niềm vui, luôn xinh đẹp rạng ngời và hạnh phúc trọn vẹn! Cảm ơn Chi vì đã luôn mang lại những điều tuyệt vời và nụ cười ấm áp. Mong mọi điều tốt lành, may mắn và ngọt ngào nhất luôn đồng hành cùng Chi! 💐💕',
+  popupMessage: 'Chúc Chi ngày 20/10 thật nhiều niềm vui, luôn xinh đẹp rạng ngời và hạnh phúc trọn vẹn! Cảm ơn Chi vì đã luôn mang lại những điều tuyệt vời và nụ cười ấm áp. Mong mọi điều tốt lành, may mắn và ngọt ngào nhất luôn đồng hành cùng Chi! 💐✨',
   messages: [
     'Chúc Mừng 20/10 💐',
-    'Gửi Đến Chi Ree 💕',
+    'Gửi Đến Chi Re ✨',
     'Chúc Chi Luôn Xinh Đẹp ✨',
-    'Rạng Rỡ & Hạnh Phúc 💖'
+    'Rạng Rỡ & Hạnh Phúc ✨'
   ],
   images:   DEFAULT_IMAGES,
 };

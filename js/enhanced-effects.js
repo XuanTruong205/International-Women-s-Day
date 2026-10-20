@@ -221,9 +221,9 @@ function z() {
         (x && 0 !== x.length) ||
         (x = [
             "Chúc Mừng 20/10 💐",
-            "Gửi Đến Chi Ree 💕",
+            "Gửi Đến Chi Re ✨",
             "Chúc Chi Luôn Xinh Đẹp ✨",
-            "Rạng Rỡ & Hạnh Phúc 💖"
+            "Rạng Rỡ & Hạnh Phúc ✨"
         ]));
     const t = () => {
         (F(x[0]), (A = Date.now()));

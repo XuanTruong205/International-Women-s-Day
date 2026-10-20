@@ -6710,7 +6710,6 @@ function Zr({ client: e, clientId: t }) {
                     maxDistance: 50,
                   }),
                   Hr(e),
-                  kr(e),
                   PhotoRain(),
                 ],
               }),
@@ -6945,49 +6944,7 @@ function Fr({ startX: e, startZ: t, speed: i, color: s, scale: customScale = 1.2
   );
 }
 function kr({ color: e }) {
-  const isMob = typeof window !== "undefined" && window.innerWidth < 768;
-  const t = [];
-  if (isMob) {
-    const mobHeartX = [-8.5, -4.2, 0, 4.2, 8.5];
-    const mobHeartZ = [-22, -13, -3, 6];
-    for (let r = 0; r < mobHeartZ.length; r++) {
-      for (let o = 0; o < mobHeartX.length; o++) {
-        const startX = mobHeartX[o] + (r % 2 === 0 ? 0.7 : -0.7);
-        const startZ = mobHeartZ[r] + (o % 2 === 0 ? 0.8 : -0.8);
-        t.push(
-          B.jsx(
-            Fr,
-            {
-              startX: startX,
-              startZ: startZ,
-              speed: 4 + Math.random() * 4,
-              color: "#EE66A6",
-              scale: 1.15,
-            },
-            `heart-${r}-${o}`,
-          )
-        );
-      }
-    }
-    return t;
-  }
-
-  for (let r = 0; r < 8; r++)
-    for (let o = 0; o < 8; o++)
-      t.push(
-        B.jsx(
-          Fr,
-          {
-            startX: -24 + o * 6,
-            startZ: -18 + r * 5,
-            speed: 5 + Math.random() * 8,
-            color: "#EE66A6",
-            scale: 2.0,
-          },
-          `heart-${r}-${o}`,
-        ),
-      );
-  return t;
+  return [];
 }
 class PhotoTexLoader {
   load(e, t, i, s) {
